@@ -1,0 +1,30 @@
+.naive-todo-item {
+  display: flex;
+  align-items: center;
+  padding: .625rem 1.25rem;
+  width: 100%;
+  min-height: 2.5rem;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+
+  &:last-child { border-bottom: none; }
+  
+  .content {
+    margin-right: auto;
+    padding: 0 .75rem;
+    line-height: 1.25rem;
+    font-size: 1rem;
+    word-break: break-all;
+    width: calc(100% - 6.25rem);
+    &.completed {
+      color: #666;
+      text-decoration: line-through;
+    }
+  }
+
+  .other-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 3.75rem;
+  }
+}

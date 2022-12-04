@@ -9,31 +9,35 @@ interface Props {
 }
 
 export default function TodoInput(props: Props) {
-	const [content, setContent] = useState<string>("");
+	// 数据
+	const [val, setVal] = useState<string>("");
 
+	// 回车提交
 	function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
 		if (event.key !== "Enter") return;
 		submit();
 	}
 
+	// 提交
 	function submit() {
-		if (content.trim() === "") return;
+		if (val.trim() === "") return;
 		const todo: Todo = {
 			id: nanoid(),
-			content: content,
+			content: val,
 			date: Date.now().toString(),
 			completed: false
 		};
 		props.addTodo(todo);
-		setContent("");
+		setVal("");
 	}
 
 	return (
 		<Input
 			addonBefore={<SendOutlined onClick={submit}/>}
-			value={content}
+			maxLength={200}
+			value={val}
 			onKeyUp={handleKeyUp}
-			onChange={(e) => { setContent(e.target.value); }}
+			onChange={(e) => { setVal(e.target.value); }}
 		/>
 	);
 }
