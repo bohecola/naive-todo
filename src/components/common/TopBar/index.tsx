@@ -7,7 +7,7 @@ export default function TopBar() {
 	// 导航
 	const navigate = useNavigate();
 	// 当前导航索引
-	const [curIdx, setCurIdx] = useState(0);
+	const [curPath, setCurPath] = useState("/home");
 
 	// 导航标签
 	const navs = [
@@ -16,25 +16,17 @@ export default function TopBar() {
 	];
 
 	// 导航点击
-	function handlerNavClick(path: string, index: number) {
-		setCurIdx(index);
-		localStorage.setItem("navIndex", index.toString());
+	function handlerNavClick(path: string) {
+		setCurPath(path);
+		localStorage.setItem("navPath", path);
 		navigate(path);
 	}
 
 	// 挂载
 	useEffect(() => {
-		setCurIdx(Number(localStorage.getItem("navIndex")));
-
-		window.addEventListener("beforeunload", handleTabClose);
-		return () => {
-			window.removeEventListener("beforeunload", handleTabClose);
-		};
+		const localPath = window.location.hash.replace("#", "");
+		setCurPath(localPath);
 	}, []);
-
-	function handleTabClose() {
-		localStorage.removeItem("navIndex");
-	}
 
 	return (
 		<div className="top-bar">
@@ -44,8 +36,8 @@ export default function TopBar() {
 				{navs.map((nav, index) =>
 					<span
 						key={index}
-						className={`top-bar-item ${curIdx === index ? "active" : ""}`}
-						onClick={() => { handlerNavClick(nav.path, index); }}>
+						className={`top-bar-item ${curPath === nav.path ? "active" : ""}`}
+						onClick={() => { handlerNavClick(nav.path); }}>
 						{nav.title}
 					</span>
 				)}
