@@ -25,7 +25,16 @@ export default function TopBar() {
 	// 挂载
 	useEffect(() => {
 		setCurIdx(Number(localStorage.getItem("navIndex")));
+
+		window.addEventListener("beforeunload", handleTabClose);
+		return () => {
+			window.removeEventListener("beforeunload", handleTabClose);
+		};
 	}, []);
+
+	function handleTabClose() {
+		localStorage.removeItem("navIndex");
+	}
 
 	return (
 		<div className="top-bar">
