@@ -1,4 +1,19 @@
-## [0.1.1](https://github.com/bohecola/naive-todo/compare/v0.1.1...v0.1.1) (2022-12-04)
+## [0.1.2](https://github.com/bohecola/naive-todo/compare/v0.1.2...v0.1.2) (2023-02-22)
+
+
+### Bug Fixes
+
+* 导航高亮 ([2783fc4](https://github.com/bohecola/naive-todo/commit/2783fc4674a8ba83611c08a483837aa5a7ae5a86))
+* 列表超出滚动 ([3516bf9](https://github.com/bohecola/naive-todo/commit/3516bf97c391c77a5bf21c8801509983fedc575a))
+
+
+### Performance Improvements
+
+* 样式优化 ([9db3d9d](https://github.com/bohecola/naive-todo/commit/9db3d9d91419ac98aa2342b86195bddbc80188b6))
+
+
+
+## [0.1.2](https://github.com/bohecola/naive-todo/compare/v0.1.2...v0.1.2) (2022-12-04)
 
 
 ### Bug Fixes
