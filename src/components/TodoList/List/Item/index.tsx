@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Checkbox, Button, Input } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
-import "./index.scss";
 import { TextAreaRef } from "antd/es/input/TextArea";
+import "./index.scss";
 
 const { TextArea } = Input;
 

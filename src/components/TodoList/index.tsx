@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import List from "./List";
 import TodoInput from "./Input";
 import { Todo } from "@/types";

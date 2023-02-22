@@ -1,4 +1,3 @@
-import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import Item from "./Item";
 import { Todo } from "@/types";
