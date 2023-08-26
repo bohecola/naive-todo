@@ -11,7 +11,8 @@ export default function PageLayoutHeader() {
 	// 导航标签
 	const navs = [
 		{ path: "/home", title: "Home" },
-		{ path: "/about", title: "About" }
+		{ path: "/about", title: "About" },
+		{ path: "/changelog", title: "Changelog" },
 	];
 
 	return (

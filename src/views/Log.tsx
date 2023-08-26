@@ -5,7 +5,7 @@ export default function About() {
 	const [content, setContent] = useState<string>("");
 
 	useEffect(() => {
-		fetch("/static/md/README.md")
+		fetch("/static/md/CHANGELOG.md")
 			.then((res) => res.text())
 			.then((text) => setContent(text));
 	}, []);

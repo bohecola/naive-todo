@@ -1,6 +1,7 @@
 import React, { lazy } from "react";
 import { Navigate } from "react-router-dom";
 import Home from "@/views/Home";
+import Log from "@/views/Log";
 import Loading from "@/components/common/Loading";
 
 const About = lazy(() => import("@/views/About"));
@@ -23,6 +24,10 @@ const routes = [
 	{
 		path: "/about",
 		element: withLoadingComponent(<About />)
+	},
+	{
+		path: "/changelog",
+		element: withLoadingComponent(<Log />)
 	}
 ];
 
