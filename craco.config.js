@@ -11,7 +11,11 @@ module.exports = {
 					{
 						from: path.resolve(__dirname, "./CHANGELOG.md"),
 						to: path.resolve(__dirname, "./build/static/md/CHANGELOG.md")
-					}
+					},
+					{
+						from: path.resolve(__dirname, "./README.md"),
+						to: path.resolve(__dirname, "./build/static/md/README.md")
+					},
 				]
 			}),
 			new CompressionPlugin({
