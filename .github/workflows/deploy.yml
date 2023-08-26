@@ -41,5 +41,5 @@ jobs:
           git config user.name "bohecola"
           git config user.email "bohecola@outlook.com"
           git add -f CNAME
-          git commit -m "Add custom domain"
+          git commit -m "chore: add custom domain"
           git push origin gh-pages
