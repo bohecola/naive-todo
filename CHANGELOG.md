@@ -1,4 +1,4 @@
-## [0.1.2](https://github.com/bohecola/naive-todo/compare/v0.1.2...v0.1.2) (2023-02-22)
+## [0.1.3](https://github.com/bohecola/naive-todo/compare/v0.1.3...v0.1.3) (2023-02-22)
 
 
 ### Bug Fixes
@@ -13,7 +13,7 @@
 
 
 
-## [0.1.2](https://github.com/bohecola/naive-todo/compare/v0.1.2...v0.1.2) (2022-12-04)
+## [0.1.3](https://github.com/bohecola/naive-todo/compare/v0.1.3...v0.1.3) (2022-12-04)
 
 
 ### Bug Fixes
