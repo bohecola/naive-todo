@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { Input } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { nanoid } from "nanoid";
@@ -10,7 +10,7 @@ interface Props {
 
 export default function TodoInput(props: Props) {
 	// 数据
-	const [val, setVal] = useState<string>("");
+	const [inputValue, setInputValue] = useState<string>("");
 
 	// 回车提交
 	function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
@@ -20,24 +20,24 @@ export default function TodoInput(props: Props) {
 
 	// 提交
 	function submit() {
-		if (val.trim() === "") return;
+		if (inputValue.trim() === "") return;
 		const todo: Todo = {
 			id: nanoid(),
-			content: val,
+			content: inputValue,
 			date: Date.now().toString(),
 			completed: false
 		};
 		props.addTodo(todo);
-		setVal("");
+		setInputValue("");
 	}
 
 	return (
 		<Input
 			addonBefore={<SendOutlined onClick={submit}/>}
 			maxLength={200}
-			value={val}
+			value={inputValue}
 			onKeyUp={handleKeyUp}
-			onChange={(e) => { setVal(e.target.value); }}
+			onChange={(e) => { setInputValue(e.target.value); }}
 		/>
 	);
 }

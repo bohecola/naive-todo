@@ -17,26 +17,33 @@ interface Props {
 
 export default function Item(props: Props) {
 	const { curId, todo, updateCurId, updateTodo } = props;
-	// 数据
-	const [val, setVal] = useState<string>("");
-	// TextArea 节点
-	const TextAreaEl = useRef<TextAreaRef>(null);
+	// 输入数据
+	const [inputValue, setInputValue] = useState<string>("");
+	// TextArea 引用
+	const TextAreaRef = useRef<TextAreaRef>(null);
 
 	// 文本域点击切换 TextArea 编辑
 	const handleTextAreaEdit = () => {
+		// 更新当前活跃的 Todo ID
 		updateCurId(todo.id);
-		setVal(todo.content);
+		// TextArea 的绑定的值设置为当前点击 Todo 的内容
+		setInputValue(todo.content);
 	};
 
-	// 更新 Todo 数据
 	useEffect(() => {
-		if (val && !todo.completed) updateTodo({ ...todo,	content: val });
-	}, [val]);
+		// Todo 是未完成的状态时
+		if (inputValue && !todo.completed) {
+			// 实时更新当前所修改 Todo 的内容
+			updateTodo({ ...todo,	content: inputValue });
+		}
+	}, [inputValue]);
 
-	// TextAreaE 获取焦点
+	// TextArea 获取焦点
 	useEffect(() => {
-		if (TextAreaEl.current) {
-			TextAreaEl.current.focus();
+		if (TextAreaRef.current) {
+			const cursorPausePosition = inputValue.length;
+			TextAreaRef.current.resizableTextArea?.textArea.setSelectionRange(cursorPausePosition, cursorPausePosition);
+			TextAreaRef.current.focus();
 		}
 	}, [curId]);
 
@@ -61,10 +68,10 @@ export default function Item(props: Props) {
 				onClick={handleTextAreaEdit}>
 				{curId === todo.id
 					?	(<TextArea
-						ref={TextAreaEl}
+						ref={TextAreaRef}
 						maxLength={200}
-						value={val.trim()}
-						onChange={(e) => { setVal(e.target.value); }}
+						value={inputValue.trim()}
+						onChange={(e) => { setInputValue(e.target.value); }}
 						onBlur={() => { updateCurId(""); }}
 						onPressEnter={() => { updateCurId(""); }}
 						autoSize={{ minRows: 1, maxRows: 3 }}
