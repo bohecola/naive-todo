@@ -40,6 +40,6 @@ jobs:
           cd ./build
           git config user.name "bohecola"
           git config user.email "bohecola@outlook.com"
-          git add CNAME
+          git add -f CNAME
           git commit -m "Add custom domain"
           git push origin gh-pages
