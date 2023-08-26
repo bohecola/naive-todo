@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/bohecola/naive-todo/compare/v0.1.3...v0.1.4) (2023-08-26)
+
+
+### Features
+
+* changelog ([d4d6e08](https://github.com/bohecola/naive-todo/commit/d4d6e08c2fea2773ea4d68a47266d30e8722a1f6))
+
+
+
 ## [0.1.3](https://github.com/bohecola/naive-todo/compare/v0.1.2...v0.1.3) (2023-08-26)
 
 
