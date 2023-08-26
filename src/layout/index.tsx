@@ -1,20 +1,14 @@
-import React, { ReactElement } from "react";
 import { useRoutes } from "react-router-dom";
 import router from "@/router";
+import Header from "./Header/index";
 import "./index.scss";
 
-interface Props {
-	header(): ReactElement
-}
-
-export default function Layout(props: Props) {
+export default function Layout() {
 	const outlet = useRoutes(router);
 
 	return (
 		<div className="page-layout">
-			<div className="page-layout__header">
-				{props.header()}
-			</div>
+			<Header />
 			<div className="page-layout__body">
 				{outlet}
 			</div>
