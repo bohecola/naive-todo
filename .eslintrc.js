@@ -7,8 +7,8 @@ module.exports = {
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
-		"@bohecola",
 		"plugin:@typescript-eslint/recommended",
+		"@bohecola"
 	],
 	"overrides": [
 	],

@@ -1,0 +1,29 @@
+{
+  // editor
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // eslint
+  "eslint.enable": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onType",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  // 行尾字符
+  "files.eol": "\n",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+}
