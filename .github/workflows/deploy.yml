@@ -44,6 +44,7 @@ jobs:
           cd ./build
           git config user.name "bohecola"
           git config user.email "bohecola@outlook.com"
+          git config pull.rebase true
           git pull origin gh-pages
           git add -f CNAME
           git commit -m "chore: add custom domain"
