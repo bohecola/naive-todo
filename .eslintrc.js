@@ -21,6 +21,7 @@ module.exports = {
 		"react",
 		"@typescript-eslint"
 	],
+	globals: { JSX: true },
 	rules: {
 		"react/react-in-jsx-scope": "off",
 		"@typescript-eslint/no-var-requires": "off"
