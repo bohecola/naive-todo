@@ -1,15 +1,14 @@
 import { useRoutes } from "react-router-dom";
 import router from "@/router";
 import Header from "./Header/index";
-import "./index.scss";
 
 export default function Layout() {
 	const outlet = useRoutes(router);
 
 	return (
-		<div className="page-layout">
+		<div>
 			<Header />
-			<div className="page-layout__body">
+			<div className="mt-10 mx-auto max-w-3xl">
 				{outlet}
 			</div>
 		</div>
