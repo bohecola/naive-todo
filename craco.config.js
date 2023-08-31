@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
 	webpack: {
-		alias: { "@": path.resolve(__dirname, "src"), },
+		alias: { "@": path.resolve(__dirname, "src") },
 		plugins: [
 			new CopyPlugin({
 				patterns: [
@@ -15,7 +15,7 @@ module.exports = {
 					{
 						from: path.resolve(__dirname, "./README.md"),
 						to: path.resolve(__dirname, "./build/static/md/README.md")
-					},
+					}
 				]
 			}),
 			new CompressionPlugin({
@@ -23,7 +23,7 @@ module.exports = {
 				algorithm: "gzip",
 				test: /\.js$|\.css$/,
 				threshold: 10240,
-				minRatio: 0.8,
+				minRatio: 0.8
 			})
 		]
 	}
