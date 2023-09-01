@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import List from "./List";
 import TodoInput from "./Input";
 import { Todo } from "@/types";
-import "./index.scss";
 
 export default function TodoList() {
 	// 数据
@@ -56,7 +55,7 @@ export default function TodoList() {
 	const completed = todoList.filter(todo => todo.completed);
 
 	return (
-		<div className="naive-todo">
+		<div className="p-5 rounded border border-gray-300">
 			<List
 				title="任务列表"
 				curId={curId}

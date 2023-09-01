@@ -8,7 +8,7 @@ export default function Layout() {
 	return (
 		<div>
 			<Header />
-			<div className="mt-10 mx-auto max-w-3xl">
+			<div className="mt-5 py-5 mx-auto max-w-3xl">
 				{outlet}
 			</div>
 		</div>

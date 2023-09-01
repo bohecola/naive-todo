@@ -3,7 +3,6 @@ import { Checkbox, Button, Input } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
 import { TextAreaRef } from "antd/es/input/TextArea";
-import "./index.scss";
 
 const { TextArea } = Input;
 
@@ -56,7 +55,7 @@ export default function Item(props: Props) {
 	};
 
 	return (
-		<li className="naive-todo-item">
+		<li className="flex items-center p-3 border-b border-gray-300 last:border-none">
 			<Checkbox
 				style={{ marginTop: "-4px" }}
 				checked={todo.completed}
@@ -64,7 +63,7 @@ export default function Item(props: Props) {
 			/>
 
 			<div
-				className={`content ${todo.completed ? "completed" : ""}`}
+				className={`mr-auto px-3 w-[calc(100%-6.25rem)] text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
 				onClick={handleTextAreaEdit}>
 				{curId === todo.id
 					?	(<TextArea
@@ -79,7 +78,7 @@ export default function Item(props: Props) {
 					:	todo.content}
 			</div>
 
-			<div className="other-btn">
+			<div className="flex justify-between w-14">
 				<Button
 					icon={ <EditOutlined /> }
 					shape="circle"
