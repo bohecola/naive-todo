@@ -1,10 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox, Button, Input } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
-import { TextAreaRef } from "antd/es/input/TextArea";
-
-const { TextArea } = Input;
 
 interface Props {
 	curId: string
@@ -18,15 +15,11 @@ export default function Item(props: Props) {
 	const { curId, todo, updateCurId, updateTodo } = props;
 	// 输入数据
 	const [inputValue, setInputValue] = useState<string>("");
-	// TextArea 引用
-	const TextAreaRef = useRef<TextAreaRef>(null);
 
-	// 文本域点击切换 TextArea 编辑
-	const handleTextAreaEdit = () => {
+	// 编辑状态
+	const handleEdit = () => {
 		// 更新当前活跃的 Todo ID
 		updateCurId(todo.id);
-		// TextArea 的绑定的值设置为当前点击 Todo 的内容
-		setInputValue(todo.content);
 	};
 
 	useEffect(() => {
@@ -36,15 +29,6 @@ export default function Item(props: Props) {
 			updateTodo({ ...todo,	content: inputValue });
 		}
 	}, [inputValue]);
-
-	// TextArea 获取焦点
-	useEffect(() => {
-		if (TextAreaRef.current) {
-			const cursorPausePosition = inputValue.length;
-			TextAreaRef.current.resizableTextArea?.textArea.setSelectionRange(cursorPausePosition, cursorPausePosition);
-			TextAreaRef.current.focus();
-		}
-	}, [curId]);
 
 	// 更新 Todo 完成状态
 	const onCheckBoxChange = () => {
@@ -64,17 +48,18 @@ export default function Item(props: Props) {
 
 			<div
 				className={`mr-auto px-3 w-[calc(100%-6.25rem)] text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
-				onClick={handleTextAreaEdit}>
+				onClick={handleEdit}>
 				{curId === todo.id
-					?	(<TextArea
-						ref={TextAreaRef}
-						maxLength={200}
-						value={inputValue.trim()}
-						onChange={(e) => { setInputValue(e.target.value); }}
-						onBlur={() => { updateCurId(""); }}
-						onPressEnter={() => { updateCurId(""); }}
-						autoSize={{ minRows: 1, maxRows: 3 }}
-					/>)
+					?	(
+						<Input
+							autoFocus={true}
+							maxLength={200}
+							defaultValue={todo.content}
+							onChange={(e) => { setInputValue(e.target.value); }}
+							onBlur={() => { updateCurId(""); }}
+							onPressEnter={() => { updateCurId(""); }}
+						/>
+					)
 					:	todo.content}
 			</div>
 
@@ -83,7 +68,7 @@ export default function Item(props: Props) {
 					icon={ <EditOutlined /> }
 					shape="circle"
 					size="small"
-					onClick={handleTextAreaEdit}
+					onClick={handleEdit}
 				/>
 				<Button
 					icon={ <DeleteOutlined /> }
