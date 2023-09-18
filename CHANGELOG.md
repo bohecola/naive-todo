@@ -1,3 +1,25 @@
+## [0.1.5](https://github.com/bohecola/naive-todo/compare/v0.1.4...v0.1.5) (2023-09-18)
+
+
+### Bug Fixes
+
+* action failed ([0e431d6](https://github.com/bohecola/naive-todo/commit/0e431d6cc901615392d274f1b09288e678a9c95d))
+* **build:** 'JSX' is not defined ([d50d311](https://github.com/bohecola/naive-todo/commit/d50d3114f90fc2f574a18f5f657a8b1234697fd8))
+* **build:** dep loss ([2b65210](https://github.com/bohecola/naive-todo/commit/2b652100b930de414e6a675214ecbd3ded0a5e24))
+* tailwindCSS base conflicts with browser default style and third-party library style ([895b308](https://github.com/bohecola/naive-todo/commit/895b308613b7229ef9e6845e3a99bacdb17469a4))
+
+
+### Features
+
+* update eslint \& vscode config ([f61f541](https://github.com/bohecola/naive-todo/commit/f61f541b6fed66c2a988b51497bc3f4a315c8058))
+
+
+### Performance Improvements
+
+* using tailwindcss to improve todolist ([f3ba797](https://github.com/bohecola/naive-todo/commit/f3ba7973185baf2cbac3bd8e67eda4e73312c325))
+
+
+
 ## [0.1.4](https://github.com/bohecola/naive-todo/compare/v0.1.3...v0.1.4) (2023-08-26)
 
 
