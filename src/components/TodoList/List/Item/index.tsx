@@ -1,36 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Checkbox, Button, Input } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
+import { TodoContext } from "../..";
 
 interface Props {
-	curId: string
 	todo: Todo
-	updateTodo(todo: Todo): void
-	deleteTodo(id: string): void
-	updateCurId(id: string): void
 }
 
 export default function Item(props: Props) {
-	const { curId, todo, updateCurId, updateTodo } = props;
-	// 输入数据
+	const { todo } = props;
+
+	const { curId, updateCurId, updateTodo, deleteTodo } = useContext(TodoContext);
+
 	const [inputValue, setInputValue] = useState<string>("");
 
-	// 编辑状态
+	// 编辑
 	const handleEdit = () => {
-		// 更新当前活跃的 Todo ID
 		updateCurId(todo.id);
 	};
 
 	useEffect(() => {
-		// Todo 是未完成的状态时
 		if (inputValue && !todo.completed) {
-			// 实时更新当前所修改 Todo 的内容
+			// 更新
 			updateTodo({ ...todo,	content: inputValue });
 		}
 	}, [inputValue]);
 
-	// 更新 Todo 完成状态
+	// 更新状态
 	const onCheckBoxChange = () => {
 		updateTodo({
 			...todo,
@@ -74,7 +71,7 @@ export default function Item(props: Props) {
 					icon={ <DeleteOutlined /> }
 					shape="circle"
 					size="small"
-					onClick={() => {props.deleteTodo(todo.id);}}
+					onClick={() => {deleteTodo(todo.id);}}
 				/>
 			</div>
 		</li>
