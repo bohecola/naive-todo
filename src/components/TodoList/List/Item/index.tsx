@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Checkbox, Button, Input } from "antd";
+import { Checkbox, Button, Input, Tag } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
 import { TodoContext } from "../..";
+import { options } from "../../data";
 
 interface Props {
 	todo: Todo
@@ -44,7 +45,7 @@ export default function Item(props: Props) {
 			/>
 
 			<div
-				className={`mr-auto px-3 w-[calc(100%-6.25rem)] text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
+				className={`mr-auto px-3 min-w-[60%] text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
 				onClick={handleEdit}>
 				{curId === todo.id
 					?	(
@@ -58,6 +59,14 @@ export default function Item(props: Props) {
 						/>
 					)
 					:	todo.content}
+			</div>
+
+			<div>
+				{todo.type.map((e) => {
+					return (<Tag className="mr-1" key={e}>{
+						options?.find((item) => item.value === e)?.label
+					}</Tag>);
+				})}
 			</div>
 
 			<div className="flex justify-between w-14">
