@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Checkbox, Button, Input, Tag } from "antd";
+import { Checkbox, Button, Input, Tag, Select, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
 import { TodoContext } from "../..";
@@ -16,11 +16,14 @@ export default function Item(props: Props) {
 
 	const [inputValue, setInputValue] = useState<string>("");
 
+	const [selectedValue, setSelectedValue] = useState<string[]>([]);
+
 	// 编辑
 	const handleEdit = () => {
 		updateCurId(todo.id);
 	};
 
+	// 输入监听
 	useEffect(() => {
 		if (inputValue && !todo.completed) {
 			// 更新
@@ -28,12 +31,26 @@ export default function Item(props: Props) {
 		}
 	}, [inputValue]);
 
+	// 挂载
+	useEffect(() => {
+		setSelectedValue(todo.type);
+	}, []);
+
 	// 更新状态
 	const onCheckBoxChange = () => {
 		updateTodo({
 			...todo,
 			completed: !todo.completed
 		});
+	};
+
+	// 类型选择
+	const handleSelectChange = (val: string[]) => {
+		updateTodo({
+			...todo,
+			type: val
+		});
+		setSelectedValue(val);
 	};
 
 	return (
@@ -45,18 +62,29 @@ export default function Item(props: Props) {
 			/>
 
 			<div
-				className={`mr-auto px-3 min-w-[60%] text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
+				className={`mr-auto px-3  text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
 				onClick={handleEdit}>
 				{curId === todo.id
 					?	(
-						<Input
-							autoFocus={true}
-							maxLength={200}
-							defaultValue={todo.content}
-							onChange={(e) => { setInputValue(e.target.value); }}
-							onBlur={() => { updateCurId(""); }}
-							onPressEnter={() => { updateCurId(""); }}
-						/>
+						<Space.Compact onBlur={() => { updateCurId(""); }} className="flex w-[460px]">
+							<Input
+								className="mr-1 w-[300px]"
+								autoFocus={true}
+								maxLength={200}
+								defaultValue={todo.content}
+								onChange={(e) => { setInputValue(e.target.value); }}
+								onPressEnter={() => { updateCurId(""); }}
+							/>
+							<Select
+								mode="multiple"
+								className="w-[160px]"
+								value={selectedValue}
+								options={options}
+								maxTagCount={1}
+								placeholder="任务类型"
+								onChange={handleSelectChange}
+							/>
+						</Space.Compact>
 					)
 					:	todo.content}
 			</div>
