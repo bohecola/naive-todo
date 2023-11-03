@@ -7,10 +7,11 @@ import { options } from "../../data";
 
 interface Props {
 	todo: Todo
+  [key: string]: unknown
 }
 
 export default function Item(props: Props) {
-	const { todo } = props;
+	const { todo, ...otherProps } = props;
 
 	const { curId, updateCurId, updateTodo, deleteTodo } = useContext(TodoContext);
 
@@ -54,7 +55,12 @@ export default function Item(props: Props) {
 	};
 
 	return (
-		<li className="flex items-center p-3 border-b border-gray-300 last:border-none">
+		<li
+			{...otherProps}
+			className="flex items-center p-3 mb-2 bg-white/75 rounded border border-gray-300 last:mb-0">
+			<div
+				className="px-1 rounded mr-2 font-bold text-black hover:bg-gray-100"
+			>⋮⋮</div>
 			<Checkbox
 				style={{ marginTop: "-4px" }}
 				checked={todo.completed}
@@ -62,7 +68,7 @@ export default function Item(props: Props) {
 			/>
 
 			<div
-				className={`mr-auto px-3  text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
+				className={`mr-auto px-3 text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
 				onClick={handleEdit}>
 				{curId === todo.id
 					?	(

@@ -27,7 +27,8 @@ export default function TodoInput() {
 		// 数据
 		const todo: Todo = {
 			id: nanoid(),
-			content: inputValue,			date: Date.now().toString(),
+			content: inputValue,
+			date: Date.now().toString(),
 			type: selectedValue,
 			completed: false
 		};

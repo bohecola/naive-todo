@@ -9,6 +9,7 @@ interface TodoContextProps {
   addTodo: (todo: Todo) => void
   updateTodo: (updatedTodo: Todo) => void
   deleteTodo: (id: string) => void
+  update: (newTodoList: Todo[]) => void
 }
 
 export const TodoContext = createContext<TodoContextProps>(null!);
@@ -67,6 +68,7 @@ export default function TodoList() {
 		<TodoContext.Provider
 			value={{
 				curId,
+				update,
 				addTodo,
 				updateTodo,
 				deleteTodo,
