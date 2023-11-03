@@ -4,7 +4,6 @@ import { GithubOutlined } from "@ant-design/icons";
 
 export default function Item(props: NavItem) {
 	// 图标
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const icons: {[key: string]: any} = { github: GithubOutlined };
 
 	// 导航
