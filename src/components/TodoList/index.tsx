@@ -103,7 +103,7 @@ export default function TodoList() {
 				deleteDone,
 				updateDoneList
 			}}>
-			<div className="p-5 rounded border border-gray-300">
+			<div className="p-5 rounded bg-white/50 border border-gray-300">
 				<List
 					title="任务列表"
 					list={todoList}

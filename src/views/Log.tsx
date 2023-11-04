@@ -11,8 +11,8 @@ export default function About() {
 	}, []);
 
 	return (
-		<div className="page-about">
-			<ReactMarkdown>{content}</ReactMarkdown>
+		<div className="max-w-3xl mx-auto">
+			<ReactMarkdown className="p-5 border bg-white/50">{content}</ReactMarkdown>
 		</div>
 	);
 }

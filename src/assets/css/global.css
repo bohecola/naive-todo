@@ -18,6 +18,14 @@
   }
 }
 
+.dot-grid {
+  background: #fff;
+  background-image: 
+    linear-gradient(#fff 22px, transparent 0),
+    linear-gradient(90deg, #ccc 2px, transparent 0);
+  background-size: 24px 24px;
+}
+
 *::-webkit-scrollbar {
   width: 10px;
   height: 10px;

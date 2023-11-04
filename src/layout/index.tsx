@@ -8,9 +8,9 @@ export default function Layout() {
 	return (
 		<div>
 			<Header />
-			<div className="mt-5 py-5 mx-auto max-w-3xl">
+			<main className="dot-grid py-5 min-h-[calc(100vh-80px)] w-screen">
 				{outlet}
-			</div>
+			</main>
 		</div>
 	);
 }
