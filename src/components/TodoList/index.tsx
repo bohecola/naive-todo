@@ -7,16 +7,22 @@ interface TodoContextProps {
   curId: string
   updateCurId: (id: string) => void
   addTodo: (todo: Todo) => void
-  updateTodo: (updatedTodo: Todo) => void
   deleteTodo: (id: string) => void
-  update: (newTodoList: Todo[]) => void
+  updateTodo: (updatedTodo: Todo) => void
+  updateTodoList: (newTodoList: Todo[]) => void
+  addDone: (done: Todo) => void
+  deleteDone: (id: string) => void
+  updateDone: (updatedDone: Todo) => void
+  updateDoneList: (newDoneList: Todo[]) => void
 }
 
 export const TodoContext = createContext<TodoContextProps>(null!);
 
 export default function TodoList() {
-	// 数据
+	// 未完成
 	const [todoList, setTodoList] = useState<Todo[]>([]);
+	// 已完成
+	const [doneList, setDoneList] = useState<Todo[]>([]);
 	// CurId
 	const [curId, setCurId] = useState<string>("");
 
@@ -25,64 +31,92 @@ export default function TodoList() {
 		setCurId(id);
 	}
 
-	// 更新
-	function update(newTodoList: Todo[]) {
-		setTodoList(newTodoList);
-		localStorage.setItem("todoList", JSON.stringify(newTodoList));
-	}
-
 	// 新增 Todo
-	function addTodo(todo: Todo): void {
-		const newTodoList = [todo, ...todoList];
-		update(newTodoList);
-	}
-
-	// 修改 Todo
-	function updateTodo(updatedTodo: Todo) {
-		const newTodoList = todoList.map(todo => {
-			return todo.id === updatedTodo.id
-				? updatedTodo
-				: todo;
-		});
-		update(newTodoList);
+	function addTodo(todo: Todo) {
+		updateTodoList([todo, ...todoList]);
 	}
 
 	// 删除 Todo
 	function deleteTodo(id: string) {
-		const newTodoList = todoList.filter(todo => todo.id !== id);
-		update(newTodoList);
+		updateTodoList(todoList.filter(todo => todo.id !== id));
+	}
+
+	// 更新 Todo
+	function updateTodo(updatedTodo: Todo) {
+		updateTodoList(todoList.map(todo => {
+			return todo.id === updatedTodo.id
+				? updatedTodo
+				: todo;
+		}));
+	}
+
+	// 更新 TodoList
+	function updateTodoList(newTodoList: Todo[]) {
+		setTodoList(newTodoList);
+		localStorage.setItem("todoList", JSON.stringify(newTodoList));
+	}
+
+	// 新增 Done
+	function addDone(done: Todo) {
+		updateDoneList([done, ...doneList]);
+	}
+
+	// 删除 Done
+	function deleteDone(id: string) {
+		updateDoneList(doneList.filter(done => done.id !== id));
+	}
+
+	// 更新 Done
+	function updateDone(updatedDone: Todo) {
+		updateDoneList(doneList.map(done => {
+			return done.id === updatedDone.id
+				? updatedDone
+				: done;
+		}));
+	}
+
+	// 更新 DoneList
+	function updateDoneList(newDoneList: Todo[]) {
+		setDoneList(newDoneList);
+		localStorage.setItem("doneList", JSON.stringify(newDoneList));
 	}
 
 	// 挂载
 	useEffect(() => {
-		const todoList = JSON.parse(localStorage.getItem("todoList") as string);
-		if (todoList && todoList.length) setTodoList(todoList);
+		const initialTodoList = JSON.parse(localStorage.getItem("todoList") || "[]");
+		const initialDoneList = JSON.parse(localStorage.getItem("doneList") || "[]");
+		if (initialTodoList.length) setTodoList(initialTodoList);
+		if (initialDoneList.length) setDoneList(initialDoneList);
 	}, []);
-
-	// 未完成
-	const inCompleted = todoList.filter(todo => !todo.completed);
-	// 已完成
-	const completed = todoList.filter(todo => todo.completed);
 
 	return (
 		<TodoContext.Provider
 			value={{
 				curId,
-				update,
+				updateCurId,
 				addTodo,
 				updateTodo,
 				deleteTodo,
-				updateCurId
+				updateTodoList,
+				addDone,
+				updateDone,
+				deleteDone,
+				updateDoneList
 			}}>
 			<div className="p-5 rounded border border-gray-300">
 				<List
 					title="任务列表"
-					todoList={inCompleted}
+					list={todoList}
+					updateList={updateTodoList}
+					deleteItem={deleteTodo}
+					draggable
 				/>
 
-				{completed.length > 0 && (<List
+				{doneList.length > 0 && (<List
 					title="已完成"
-					todoList={completed}
+					list={doneList}
+					updateList={updateDoneList}
+					deleteItem={deleteDone}
 				/>)}
 				<TodoInput />
 			</div>

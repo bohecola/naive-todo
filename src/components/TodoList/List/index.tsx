@@ -2,21 +2,21 @@ import Title from "./Title";
 import Item from "./Item";
 import Empty from "./empty";
 import { Todo } from "@/types";
-import { DragEvent, useContext, useEffect, useRef } from "react";
-import { TodoContext } from "..";
+import { DragEvent, useRef } from "react";
 
 interface Props {
   title: string
-	todoList: Todo[],
+	list: Todo[],
+  draggable?: boolean
+  updateList: (newList: Todo[]) => void
+  deleteItem: (id: string) => void
 }
 
 export default function List(props: Props) {
-	const { update } = useContext(TodoContext);
-
-	const { title, todoList } = props;
+	const { title, list, updateList, deleteItem, draggable } = props;
 
 	// 不为空
-	const isNotEmpty = todoList.length > 0;
+	const isNotEmpty = list.length > 0;
 
 	// 拖拽元素索引
 	const dragItem = useRef<any>(null);
@@ -56,19 +56,19 @@ export default function List(props: Props) {
 	// 拖拽结束
 	const handleDragEnd = (e: DragEvent) => {
 		// 拷贝
-		const _todoList = [...todoList];
+		const _list = [...list];
 
 		// 删除
-		const [draggedItemContent] = _todoList.splice(dragItem.current, 1);
+		const [draggedItemContent] = _list.splice(dragItem.current, 1);
 
 		// 插入
-		_todoList.splice(dragOverItem.current, 0, draggedItemContent);
+		_list.splice(dragOverItem.current, 0, draggedItemContent);
 
 		dragItem.current = null;
 		dragOverItem.current = null;
 
 		// 更新
-		update(_todoList);
+		updateList(_list);
 	};
 
 	return (
@@ -79,11 +79,12 @@ export default function List(props: Props) {
 					? (
 						<ul
 							className="mb-5 max-h-[16rem] overflow-y-auto border-gray-300">
-							{todoList.map((todo, index) => (
+							{list.map((todo, index) => (
 								<Item
-									draggable
+									draggable={draggable}
 									key={todo.id}
 									todo={todo}
+									deleteItem={deleteItem}
 									onDragStart={(e: DragEvent) => handleDragStart(e, index)}
 									onDragEnter={(e: DragEvent) => handleDragEnter(e, index)}
 									onDragLeave={handleDragLeave}

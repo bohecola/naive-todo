@@ -4,16 +4,18 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Todo } from "@/types";
 import { TodoContext } from "../..";
 import { options } from "../../data";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 
 interface Props {
 	todo: Todo
+  deleteItem: (id: string) => void
   [key: string]: unknown
 }
 
 export default function Item(props: Props) {
-	const { todo, ...otherProps } = props;
+	const { todo, deleteItem, ...otherProps } = props;
 
-	const { curId, updateCurId, updateTodo, deleteTodo } = useContext(TodoContext);
+	const { curId, updateCurId, updateTodo, addTodo, addDone, deleteTodo, deleteDone } = useContext(TodoContext);
 
 	const [inputValue, setInputValue] = useState<string>("");
 
@@ -27,7 +29,7 @@ export default function Item(props: Props) {
 	// 输入监听
 	useEffect(() => {
 		if (inputValue && !todo.completed) {
-			// 更新
+			// 未完成时更新
 			updateTodo({ ...todo,	content: inputValue });
 		}
 	}, [inputValue]);
@@ -38,11 +40,18 @@ export default function Item(props: Props) {
 	}, []);
 
 	// 更新状态
-	const onCheckBoxChange = () => {
-		updateTodo({
+	const onCheckBoxChange = (e: CheckboxChangeEvent) => {
+		const newTodo = {
 			...todo,
-			completed: !todo.completed
-		});
+			completed: e.target.checked
+		};
+		if (e.target.checked) {
+			deleteTodo(todo.id);
+			addDone(newTodo);
+		} else {
+			deleteDone(todo.id);
+			addTodo(newTodo);
+		}
 	};
 
 	// 类型选择
@@ -89,6 +98,7 @@ export default function Item(props: Props) {
 								maxTagCount={1}
 								placeholder="任务类型"
 								onChange={handleSelectChange}
+								disabled={todo.completed}
 							/>
 						</Space.Compact>
 					)
@@ -114,7 +124,7 @@ export default function Item(props: Props) {
 					icon={ <DeleteOutlined /> }
 					shape="circle"
 					size="small"
-					onClick={() => {deleteTodo(todo.id);}}
+					onClick={() => {deleteItem(todo.id);}}
 				/>
 			</div>
 		</li>
