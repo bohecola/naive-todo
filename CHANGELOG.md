@@ -1,3 +1,19 @@
+## [0.1.6](https://github.com/bohecola/naive-todo/compare/v0.1.5...v0.1.6) (2023-11-04)
+
+
+### Bug Fixes
+
+* build error ([c10660b](https://github.com/bohecola/naive-todo/commit/c10660b05e158e8f89324e036a1d760cb9b7d004))
+
+
+### Features
+
+* add drag and drop feature ([42fe428](https://github.com/bohecola/naive-todo/commit/42fe428ce147159b190c62192422bda60065bba3))
+* add task type ([13c8f16](https://github.com/bohecola/naive-todo/commit/13c8f1630b5548ffbbc9e0f035bda28732fc56d1))
+* task type edit feature ([232b418](https://github.com/bohecola/naive-todo/commit/232b41838f47540a60c52fdb1b4ff41b48e5e2fd))
+
+
+
 ## [0.1.5](https://github.com/bohecola/naive-todo/compare/v0.1.4...v0.1.5) (2023-09-18)
 
 
