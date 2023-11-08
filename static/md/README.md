@@ -4,6 +4,11 @@
 ## 动机
 React + TS 练手
 
+## 功能
+- TodoList 添加、删除和修改功能 
+- TodoList 支持列表拖拽排序功能
+- TodoItem 支持设置任务优先级标签功能
+
 ## 数据存储
 浏览器 LocalStorage
 
