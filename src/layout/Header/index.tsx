@@ -11,7 +11,7 @@ export default function PageLayoutHeader() {
 	];
 
 	return (
-		<header className="flex items-center px-4 w-full h-[80px] bg-teal-600 text-gray-200">
+		<header className="flex items-center px-4 w-full h-[80px] bg-slate-800 text-gray-200">
 			<div className="text-2xl">NTodo</div>
 			<div className="flex-1"></div>
 			<Navigaiton navs={navs} />

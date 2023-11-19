@@ -12,7 +12,7 @@ export default function About() {
 
 	return (
 		<div className="max-w-3xl mx-auto">
-			<ReactMarkdown className="p-5 border bg-white/50">{content}</ReactMarkdown>
+			<ReactMarkdown className="p-5 bg-slate-800 text-white border-2 border-slate-600">{content}</ReactMarkdown>
 		</div>
 	);
 }

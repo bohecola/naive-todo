@@ -19,10 +19,10 @@
 }
 
 .dot-grid {
-  background: #fff;
+  background: #374151;
   background-image: 
-    linear-gradient(#fff 22px, transparent 0),
-    linear-gradient(90deg, #ccc 2px, transparent 0);
+    linear-gradient(#374151 22px, transparent 0),
+    linear-gradient(90deg, #6b7280 2px, transparent 0);
   background-size: 24px 24px;
 }
 

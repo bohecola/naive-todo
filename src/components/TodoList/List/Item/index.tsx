@@ -66,18 +66,20 @@ export default function Item(props: Props) {
 	return (
 		<li
 			{...otherProps}
-			className="flex items-center p-3 mb-2 bg-white/75 rounded border border-gray-300 last:mb-0">
-			<div
-				className="px-1 rounded mr-2 font-bold text-black hover:bg-gray-100"
-			>⋮⋮</div>
+			className="flex items-center p-3 mb-2 bg-slate-600/75 text-white rounded last:mb-0"
+		>
+
+			<div className="p-1 mx-2 hover:bg-slate-600">
+        ⋮⋮
+			</div>
+
 			<Checkbox
-				style={{ marginTop: "-4px" }}
 				checked={todo.completed}
 				onChange={onCheckBoxChange}
 			/>
 
 			<div
-				className={`mr-auto px-3 text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-gray-600"}`}
+				className={`mr-auto px-3 text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-white"}`}
 				onClick={handleEdit}>
 				{curId === todo.id
 					?	(
@@ -105,11 +107,17 @@ export default function Item(props: Props) {
 					:	todo.content}
 			</div>
 
-			<div>
+			<div className="mr-4">
 				{todo.type.map((e) => {
-					return (<Tag className="mr-1" key={e}>{
-						options?.find((item) => item.value === e)?.label
-					}</Tag>);
+					return (
+						<Tag
+							className="mr-1 last:mr-0 bg-slate-700 text-gray-200"
+							bordered={false}
+							key={e}>{
+								options?.find((item) => item.value === e)?.label
+							}
+						</Tag>
+					);
 				})}
 			</div>
 

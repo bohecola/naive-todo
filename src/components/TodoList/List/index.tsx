@@ -8,12 +8,13 @@ interface Props {
   title: string
 	list: Todo[],
   draggable?: boolean
+  className?: string
   updateList: (newList: Todo[]) => void
   deleteItem: (id: string) => void
 }
 
 export default function List(props: Props) {
-	const { title, list, updateList, deleteItem, draggable } = props;
+	const { title, list, updateList, deleteItem, draggable, className } = props;
 
 	// 不为空
 	const isNotEmpty = list.length > 0;
@@ -78,7 +79,7 @@ export default function List(props: Props) {
 				isNotEmpty
 					? (
 						<ul
-							className="mb-5 max-h-[16rem] overflow-y-auto border-gray-300">
+							className={`${className} border-slate-600 mb-5`}>
 							{list.map((todo, index) => (
 								<Item
 									draggable={draggable}

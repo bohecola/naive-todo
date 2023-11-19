@@ -103,10 +103,11 @@ export default function TodoList() {
 				deleteDone,
 				updateDoneList
 			}}>
-			<div className="p-5 rounded bg-white/50 border border-gray-300">
+			<div className="p-10 bg-slate-800 border-2 rounded-lg border-slate-600">
 				<List
 					title="任务列表"
 					list={todoList}
+					className="mb-10"
 					updateList={updateTodoList}
 					deleteItem={deleteTodo}
 					draggable
