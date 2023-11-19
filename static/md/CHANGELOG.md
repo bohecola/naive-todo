@@ -1,3 +1,12 @@
+## [0.1.7](https://github.com/bohecola/naive-todo/compare/v0.1.6...v0.1.7) (2023-11-19)
+
+
+### Features
+
+* add dot-grid background ([91b29fc](https://github.com/bohecola/naive-todo/commit/91b29fc9c2bbb1c80b59d10a4a2f5d558e85b2e4))
+
+
+
 ## [0.1.6](https://github.com/bohecola/naive-todo/compare/v0.1.5...v0.1.6) (2023-11-04)
 
 
