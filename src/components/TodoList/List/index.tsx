@@ -3,18 +3,22 @@ import Item from "./Item";
 import Empty from "./empty";
 import { Todo } from "@/types";
 import { DragEvent, useRef } from "react";
+import { useTodo, useTodoDispatch } from "../context";
+import { ActionType } from "../context/reducer";
 
 interface Props {
   title: string
 	list: Todo[],
   draggable?: boolean
   className?: string
-  updateList: (newList: Todo[]) => void
-  deleteItem: (id: string) => void
 }
 
 export default function List(props: Props) {
-	const { title, list, updateList, deleteItem, draggable, className } = props;
+	const { title, list, draggable, className } = props;
+
+	const { todoList } = useTodo()!;
+
+	const dispatch = useTodoDispatch();
 
 	// 不为空
 	const isNotEmpty = list.length > 0;
@@ -25,51 +29,54 @@ export default function List(props: Props) {
 	const dragOverItem = useRef<any>(null);
 
 	// 拖拽开始
-	const handleDragStart = (e: DragEvent, index: number) => {
-		dragItem.current = index;
+	const handleDragStart = (e: DragEvent, id: string) => {
+		dragItem.current = id;
 		e.dataTransfer.effectAllowed = "move";
 	};
 
 	// 拖拽进入
-	const handleDragEnter = (e: DragEvent, index: number) => {
+	const handleDragEnter = (e: DragEvent, id: string) => {
 		e.preventDefault();
-		dragOverItem.current = index;
-
 		const target = e.target as HTMLElement;
-
 		target.classList.add(...["!bg-black/25"]);
+
+		dragOverItem.current = id;
 	};
 
 	// 拖拽离开
 	const handleDragLeave = (e: DragEvent) => {
 		const target = e.target as HTMLElement;
-
 		target.classList.remove(...["!bg-black/25"]);
 	};
 
 	// 拖拽释放
 	const handleDrop = (e: DragEvent) => {
 		const target = e.target as HTMLElement;
-
 		target.classList.remove(...["!bg-black/25"]);
 	};
 
 	// 拖拽结束
 	const handleDragEnd = (e: DragEvent) => {
-		// 拷贝
-		const _list = [...list];
+		// 拷贝一份
+		const _todoList = [...todoList];
+
+		// 被拖拽的 Todo 索引
+		const draggedTodoIdx = _todoList.findIndex((item) => item.id === dragItem.current);
+
+		// Over 的 Todo 索引
+		const dragOverTodoIdx = _todoList.findIndex((item) => item.id === dragOverItem.current);
 
 		// 删除
-		const [draggedItemContent] = _list.splice(dragItem.current, 1);
+		const [draggedTodo] = _todoList.splice(draggedTodoIdx, 1);
 
 		// 插入
-		_list.splice(dragOverItem.current, 0, draggedItemContent);
+		_todoList.splice(dragOverTodoIdx, 0, draggedTodo);
 
 		dragItem.current = null;
 		dragOverItem.current = null;
 
 		// 更新
-		updateList(_list);
+		dispatch({ type: ActionType.UPDATE_TODO_LIST, payload: _todoList });
 	};
 
 	return (
@@ -79,15 +86,14 @@ export default function List(props: Props) {
 				isNotEmpty
 					? (
 						<ul
-							className={`${className} border-slate-600 mb-5`}>
+							className={`${className} mb-5 p-0 border-slate-600`}>
 							{list.map((todo, index) => (
 								<Item
 									draggable={draggable}
 									key={todo.id}
 									todo={todo}
-									deleteItem={deleteItem}
-									onDragStart={(e: DragEvent) => handleDragStart(e, index)}
-									onDragEnter={(e: DragEvent) => handleDragEnter(e, index)}
+									onDragStart={(e: DragEvent) => handleDragStart(e, todo.id)}
+									onDragEnter={(e: DragEvent) => handleDragEnter(e, todo.id)}
 									onDragLeave={handleDragLeave}
 									onDragEnd={handleDragEnd}
 									onDrop={handleDrop}

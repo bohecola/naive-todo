@@ -1,10 +1,11 @@
-import { KeyboardEvent, useContext, useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { Input, Select } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { nanoid } from "nanoid";
 import { Todo } from "@/types";
-import { TodoContext } from "..";
 import { options } from "../data";
+import { useTodo, useTodoDispatch } from "../context";
+import { ActionType } from "../context/reducer";
 
 
 export default function TodoInput() {
@@ -12,8 +13,7 @@ export default function TodoInput() {
 	const [inputValue, setInputValue] = useState<string>("");
 	const [selectedValue, setSelectedValue] = useState<string[]>(["important"]);
 
-	// 上下文
-	const { addTodo } = useContext(TodoContext);
+	const dispatch = useTodoDispatch();
 
 	// 回车提交
 	function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
@@ -24,6 +24,7 @@ export default function TodoInput() {
 	// 提交
 	function submit() {
 		if (inputValue.trim() === "") return;
+
 		// 数据
 		const todo: Todo = {
 			id: nanoid(),
@@ -32,8 +33,10 @@ export default function TodoInput() {
 			type: selectedValue,
 			completed: false
 		};
+
 		// 添加
-		addTodo(todo);
+		dispatch({ type: ActionType.ADD_TODO, payload: todo });
+
 		// 清空
 		setInputValue("");
 	}

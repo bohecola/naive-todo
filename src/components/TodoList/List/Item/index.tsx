@@ -1,36 +1,38 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Checkbox, Button, Input, Tag, Select, Space } from "antd";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Todo } from "@/types";
-import { TodoContext } from "../..";
-import { options } from "../../data";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { options } from "../../data";
+import { useTodo, useTodoDispatch } from "../../context";
+import { ActionType } from "../../context/reducer";
+import { Todo } from "@/types";
 
 interface Props {
 	todo: Todo
-  deleteItem: (id: string) => void
   [key: string]: unknown
 }
 
 export default function Item(props: Props) {
-	const { todo, deleteItem, ...otherProps } = props;
-
-	const { curId, updateCurId, updateTodo, addTodo, addDone, deleteTodo, deleteDone } = useContext(TodoContext);
+	const { todo, ...otherProps } = props;
 
 	const [inputValue, setInputValue] = useState<string>("");
 
 	const [selectedValue, setSelectedValue] = useState<string[]>([]);
 
+	const { activeId } = useTodo()!;
+
+	const dispatch = useTodoDispatch();
+
 	// 编辑
 	const handleEdit = () => {
-		updateCurId(todo.id);
+		dispatch({ type: ActionType.UPDATE_ACTIVE_ID, payload: todo.id });
 	};
 
 	// 输入监听
 	useEffect(() => {
 		if (inputValue && !todo.completed) {
 			// 未完成时更新
-			updateTodo({ ...todo,	content: inputValue });
+			dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, content: inputValue } });
 		}
 	}, [inputValue]);
 
@@ -41,26 +43,23 @@ export default function Item(props: Props) {
 
 	// 更新状态
 	const onCheckBoxChange = (e: CheckboxChangeEvent) => {
-		const newTodo = {
-			...todo,
-			completed: e.target.checked
-		};
-		if (e.target.checked) {
-			deleteTodo(todo.id);
-			addDone(newTodo);
-		} else {
-			deleteDone(todo.id);
-			addTodo(newTodo);
-		}
+		dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, completed: e.target.checked } });
 	};
 
 	// 类型选择
 	const handleSelectChange = (val: string[]) => {
-		updateTodo({
-			...todo,
-			type: val
-		});
+		dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, type: val } });
 		setSelectedValue(val);
+	};
+
+	// 清除活跃状态
+	const clearActive = () => {
+		dispatch({ type: ActionType.UPDATE_ACTIVE_ID, payload: "" });
+	};
+
+	// 删除
+	const remove = () => {
+		dispatch({ type: ActionType.DELETE_TODO, payload: todo });
 	};
 
 	return (
@@ -81,16 +80,16 @@ export default function Item(props: Props) {
 			<div
 				className={`mr-auto px-3 text-sm break-all ${todo.completed ? "text-gray-400 line-through" : "text-white"}`}
 				onClick={handleEdit}>
-				{curId === todo.id
+				{activeId === todo.id
 					?	(
-						<Space.Compact onBlur={() => { updateCurId(""); }} className="flex w-[460px]">
+						<Space.Compact onBlur={clearActive} className="flex w-[460px]">
 							<Input
 								className="mr-1 w-[300px]"
 								autoFocus={true}
 								maxLength={200}
 								defaultValue={todo.content}
 								onChange={(e) => { setInputValue(e.target.value); }}
-								onPressEnter={() => { updateCurId(""); }}
+								onPressEnter={clearActive}
 							/>
 							<Select
 								mode="multiple"
@@ -132,7 +131,7 @@ export default function Item(props: Props) {
 					icon={ <DeleteOutlined /> }
 					shape="circle"
 					size="small"
-					onClick={() => {deleteItem(todo.id);}}
+					onClick={remove}
 				/>
 			</div>
 		</li>
