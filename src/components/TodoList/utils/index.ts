@@ -1,4 +1,5 @@
 import { Todo } from "@/types";
+import { initialTodoList } from "../data";
 
 export const store = {
 	setTodoList: (todoList: Todo[]) => {
@@ -6,6 +7,6 @@ export const store = {
 	},
 	getTodoList: (): Todo[] => {
 		const todoList = localStorage.getItem("todoList");
-		return todoList ? JSON.parse(todoList) : [];
+		return todoList ? JSON.parse(todoList) : initialTodoList;
 	}
 };
