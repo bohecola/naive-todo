@@ -1,6 +1,6 @@
 ## [0.1.8](https://github.com/bohecola/naive-todo/compare/v0.1.7...v0.1.8) (2023-11-27)
 
-
+* refactor: state improvement by reducer and context ([1f4b228](https://github.com/bohecola/naive-todo/commit/1f4b228eaf657d882a1b73df566253e591157ff1))
 
 ## [0.1.7](https://github.com/bohecola/naive-todo/compare/v0.1.6...v0.1.7) (2023-11-19)
 
