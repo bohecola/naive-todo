@@ -3,7 +3,7 @@ import Item from "./Item";
 import Empty from "./empty";
 import { Todo } from "@/types";
 import { DragEvent, useRef } from "react";
-import { useTodo, useTodoDispatch } from "../context";
+import { useTodoList, useTodoListDispatch } from "../context";
 import { ActionType } from "../context/reducer";
 
 interface Props {
@@ -16,9 +16,11 @@ interface Props {
 export default function List(props: Props) {
 	const { title, list, draggable, className } = props;
 
-	const { todoList } = useTodo()!;
+	// 数据
+	const { todoList } = useTodoList()!;
 
-	const dispatch = useTodoDispatch();
+	// 派发器
+	const dispatch = useTodoListDispatch();
 
 	// 不为空
 	const isNotEmpty = list.length > 0;

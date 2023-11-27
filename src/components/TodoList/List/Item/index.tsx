@@ -3,7 +3,7 @@ import { Checkbox, Button, Input, Tag, Select, Space } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { options } from "../../data";
-import { useTodo, useTodoDispatch } from "../../context";
+import { useTodoList, useTodoListDispatch } from "../../context";
 import { ActionType } from "../../context/reducer";
 import { Todo } from "@/types";
 
@@ -15,13 +15,17 @@ interface Props {
 export default function Item(props: Props) {
 	const { todo, ...otherProps } = props;
 
+	// 输入框数据
 	const [inputValue, setInputValue] = useState<string>("");
 
+	// 类型选择数据
 	const [selectedValue, setSelectedValue] = useState<string[]>([]);
 
-	const { activeId } = useTodo()!;
+	// 活跃状态
+	const { activeId } = useTodoList()!;
 
-	const dispatch = useTodoDispatch();
+	// 派发器
+	const dispatch = useTodoListDispatch();
 
 	// 编辑
 	const handleEdit = () => {

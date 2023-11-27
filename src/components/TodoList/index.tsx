@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import List from "./List";
 import TodoInput from "./Input";
-import { useTodo, useTodoDispatch } from "./context";
-import { ActionType } from "./context/reducer";
+import { useTodoList } from "./context";
 import { Todo } from "@/types";
 
 export default function TodoList() {
-	const { todoList } = useTodo()!;
-
-	const dispatch = useTodoDispatch();
+	const { todoList } = useTodoList()!;
 
 	// 未完成列表
 	const [unDoneList, setUnDoneList] = useState<Todo[]>([]);
@@ -21,16 +18,8 @@ export default function TodoList() {
 		setDoneList(todoList.filter((item) => item.completed));
 	}, [todoList]);
 
-
-	// 挂载
-	useEffect(() => {
-		const initialTodoList = JSON.parse(localStorage.getItem("todoList") || "[]");
-		if (initialTodoList.length) dispatch({ type: ActionType.UPDATE_TODO_LIST, payload: initialTodoList });
-	}, []);
-
 	return (
 		<div className="p-10 bg-slate-800 border-2 rounded-lg border-slate-600">
-
 			<List
 				title="任务列表"
 				list={unDoneList}

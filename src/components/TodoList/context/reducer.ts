@@ -1,4 +1,5 @@
 import { Todo } from "@/types";
+import { store } from "../utils";
 
 export type State = {
   activeId: string;
@@ -32,39 +33,36 @@ export type Action = ActiveAction | TodoAction | TodoListAction;
 
 export const initialState: State = {
 	activeId: "",
-	todoList: []
-};
-
-const store = {
-	setTodoList: (todoList: Todo[]) => {
-		localStorage.setItem("todoList", JSON.stringify(todoList));
-	}
+	todoList: store.getTodoList()
 };
 
 export function reducer(state: State, action: Action) {
+	let todoList: Todo[];
+
 	switch (action.type) {
 		case ActionType.UPDATE_ACTIVE_ID:
 			return { ...state, activeId: action.payload };
 		case ActionType.ADD_TODO: {
-			const todoList = [action.payload, ...state.todoList];
-			store.setTodoList(todoList);
-			return { ...state, todoList };
+			todoList = [action.payload, ...state.todoList];
+			break;
 		}
 		case ActionType.DELETE_TODO: {
-			const todoList = state.todoList.filter(todo => todo.id !== action.payload.id);
-			store.setTodoList(todoList);
-			return { ...state, todoList };
+			todoList = state.todoList.filter(todo => todo.id !== action.payload.id);
+			break;
 		}
 		case ActionType.UPDATE_TODO: {
-			const todoList = state.todoList.map(todo => todo.id === action.payload.id ? action.payload : todo);
-			store.setTodoList(todoList);
-			return { ...state, todoList  };
+			todoList = state.todoList.map(todo => todo.id === action.payload.id ? action.payload : todo);
+			break;
 		}
 		case ActionType.UPDATE_TODO_LIST: {
-			store.setTodoList(action.payload);
-			return { ...state, todoList: action.payload };
+			todoList = action.payload;
 		}
-		default:
-			throw new Error("Unhandled action type");
 	}
+
+	if (todoList !== undefined) {
+		store.setTodoList(todoList);
+		return { ...state, todoList };
+	}
+
+	return state;
 }

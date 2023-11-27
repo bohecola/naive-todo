@@ -1,15 +1,16 @@
 import { createContext, useContext, useReducer, Dispatch, ReactNode } from "react";
 import { State, Action, reducer, initialState } from "./reducer";
 
+// TodoList 上下文
 const TodoListContext = createContext<State>(null!);
-
 const TodoListDispatchContext = createContext<Dispatch<Action>>(null!);
 
+// TodoList 上下文提供器
 export default function TodoListContextProvider({ children }: { children: ReactNode }) {
-	const [context, dispatch] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
-		<TodoListContext.Provider value={context}>
+		<TodoListContext.Provider value={state}>
 			<TodoListDispatchContext.Provider value={dispatch}>
 				{children}
 			</TodoListDispatchContext.Provider>
@@ -17,10 +18,12 @@ export default function TodoListContextProvider({ children }: { children: ReactN
 	);
 }
 
-export function useTodo() {
+// 用于获取 state
+export function useTodoList() {
 	return useContext(TodoListContext);
 }
 
-export function useTodoDispatch() {
+// 用于获取 dispatch
+export function useTodoListDispatch() {
 	return useContext(TodoListDispatchContext);
 }

@@ -4,7 +4,7 @@ import { SendOutlined } from "@ant-design/icons";
 import { nanoid } from "nanoid";
 import { Todo } from "@/types";
 import { options } from "../data";
-import { useTodo, useTodoDispatch } from "../context";
+import { useTodoListDispatch } from "../context";
 import { ActionType } from "../context/reducer";
 
 
@@ -13,7 +13,8 @@ export default function TodoInput() {
 	const [inputValue, setInputValue] = useState<string>("");
 	const [selectedValue, setSelectedValue] = useState<string[]>(["important"]);
 
-	const dispatch = useTodoDispatch();
+	// 派发器
+	const dispatch = useTodoListDispatch();
 
 	// 回车提交
 	function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
