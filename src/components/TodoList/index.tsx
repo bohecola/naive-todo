@@ -5,7 +5,7 @@ import { useTodoList } from "./context";
 import { Todo } from "@/types";
 
 export default function TodoList() {
-	const { todoList } = useTodoList()!;
+	const { todoList } = useTodoList();
 
 	// 未完成列表
 	const [unDoneList, setUnDoneList] = useState<Todo[]>([]);
@@ -13,6 +13,7 @@ export default function TodoList() {
 	// 已完成列表
 	const [doneList, setDoneList] = useState<Todo[]>([]);
 
+	// 更新视图列表
 	useEffect(() => {
 		setUnDoneList(todoList.filter((item) => !item.completed));
 		setDoneList(todoList.filter((item) => item.completed));

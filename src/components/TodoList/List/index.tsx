@@ -17,7 +17,7 @@ export default function List(props: Props) {
 	const { title, list, draggable, className } = props;
 
 	// 数据
-	const { todoList } = useTodoList()!;
+	const { todoList } = useTodoList();
 
 	// 派发器
 	const dispatch = useTodoListDispatch();

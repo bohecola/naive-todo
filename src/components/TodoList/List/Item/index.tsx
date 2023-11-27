@@ -22,7 +22,7 @@ export default function Item(props: Props) {
 	const [selectedValue, setSelectedValue] = useState<string[]>([]);
 
 	// 活跃状态
-	const { activeId } = useTodoList()!;
+	const { activeId } = useTodoList();
 
 	// 派发器
 	const dispatch = useTodoListDispatch();
