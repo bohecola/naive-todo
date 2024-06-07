@@ -3,6 +3,7 @@ import List from "./List";
 import TodoInput from "./Input";
 import { useTodoList } from "./context";
 import { Todo } from "@/types";
+import BaseContainer from "../common/Container";
 
 export default function TodoList() {
 	const { todoList } = useTodoList();
@@ -20,7 +21,7 @@ export default function TodoList() {
 	}, [todoList]);
 
 	return (
-		<div className="p-10 bg-slate-800 border-2 rounded-lg border-slate-600">
+		<BaseContainer>
 			<List
 				title="任务列表"
 				list={unDoneList}
@@ -33,6 +34,6 @@ export default function TodoList() {
 				list={doneList}
 			/>)}
 			<TodoInput />
-		</div>
+		</BaseContainer>
 	);
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import BaseContainer from "@/components/common/Container";
 
 export default function About() {
 	const [content, setContent] = useState<string>("");
@@ -11,8 +12,8 @@ export default function About() {
 	}, []);
 
 	return (
-		<div className="max-w-3xl mx-auto">
-			<ReactMarkdown className="p-5 bg-slate-800 text-white border-2 border-slate-600">{content}</ReactMarkdown>
-		</div>
+		<BaseContainer>
+			<ReactMarkdown>{content}</ReactMarkdown>
+		</BaseContainer>
 	);
 }
