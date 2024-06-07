@@ -3,7 +3,7 @@ import { Input, Select } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { nanoid } from "nanoid";
 import { Todo } from "@/types";
-import { options } from "../data";
+import { options } from "@/data";
 import { useTodoListDispatch } from "../context";
 import { ActionType } from "../context/reducer";
 

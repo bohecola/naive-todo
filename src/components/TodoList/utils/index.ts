@@ -1,5 +1,5 @@
 import { Todo } from "@/types";
-import { initialTodoList } from "../data";
+import { initialTodoList } from "@/data";
 
 export const store = {
 	setTodoList: (todoList: Todo[]) => {

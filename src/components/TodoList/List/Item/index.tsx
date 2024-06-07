@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Checkbox, Button, Input, Tag, Select, Space } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { options } from "../../data";
+import { options } from "@/data";
 import { useTodoList, useTodoListDispatch } from "../../context";
 import { ActionType } from "../../context/reducer";
 import { Todo } from "@/types";
