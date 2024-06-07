@@ -1,3 +1,24 @@
+## [0.1.9](https://github.com/bohecola/naive-todo/compare/v0.1.8...v0.1.9) (2024-06-07)
+
+
+### Bug Fixes
+
+* lazyload Log component ([62fc49c](https://github.com/bohecola/naive-todo/commit/62fc49ca87c7aa9d581872ea8fb5f410ea0ed577))
+* typos ([b3e120d](https://github.com/bohecola/naive-todo/commit/b3e120dd7dae13e7579aeb5c7e87a01a92c8a73d))
+
+
+### Features
+
+* add initial data ([3e0a9d2](https://github.com/bohecola/naive-todo/commit/3e0a9d229fbdb31290915f76c9dbb97586b62542))
+* loading component ([4d371b6](https://github.com/bohecola/naive-todo/commit/4d371b691ee608dc2065b3828ec7b38df41cc710))
+
+
+### Performance Improvements
+
+* simplify todolist reducer ([864bbb8](https://github.com/bohecola/naive-todo/commit/864bbb80f1f5ef58f7a3ada97d0726665aae0616))
+
+
+
 ## [0.1.8](https://github.com/bohecola/naive-todo/compare/v0.1.7...v0.1.8) (2023-11-27)
 
 * refactor: state improvement by reducer and context ([1f4b228](https://github.com/bohecola/naive-todo/commit/1f4b228eaf657d882a1b73df566253e591157ff1))
