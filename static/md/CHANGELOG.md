@@ -1,3 +1,13 @@
+## [0.1.10](https://github.com/bohecola/naive-todo/compare/v0.1.9...v0.1.10) (2024-06-08)
+
+
+### Bug Fixes
+
+* cursor style ([761fb5f](https://github.com/bohecola/naive-todo/commit/761fb5f2e40ae2db3efe6d84e6dc7a9d1f3159fc))
+* todolist context provider props type ([258afbf](https://github.com/bohecola/naive-todo/commit/258afbf3c468c8b2667276016074070a70ecefa6))
+
+
+
 ## [0.1.9](https://github.com/bohecola/naive-todo/compare/v0.1.8...v0.1.9) (2024-06-07)
 
 
