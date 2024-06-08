@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import BaseContainer from "@/components/common/Container";
+import Loading from "@/components/common/Loading";
 
 export default function About() {
 	const fetcher = async (url: string) => {
@@ -8,11 +10,13 @@ export default function About() {
 		return response.text();
 	};
 
-	const { data, error, isLoading } = useSWR("/static/md/README.md", fetcher);
+	const { data } = useSWR("/static/md/README.md", fetcher, { suspense: true });
 
 	return (
-		<BaseContainer>
-			<ReactMarkdown>{data ?? ""}</ReactMarkdown>
-		</BaseContainer>
+		<Suspense fallback={<Loading />}>
+			<BaseContainer>
+				<ReactMarkdown>{data}</ReactMarkdown>
+			</BaseContainer>
+		</Suspense>
 	);
 }
