@@ -25,7 +25,6 @@ export default function TodoList() {
 			<List
 				title="任务列表"
 				list={unDoneList}
-				className="mb-10"
 				draggable
 			/>
 
