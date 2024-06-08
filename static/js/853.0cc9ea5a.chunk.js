@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunknaive_todo=self.webpackChunknaive_todo||[]).push([[853],{1853:(e,t,n)=>{n.r(t),n.d(t,{default:()=>i});var s=n(2450),a=n(6181),c=n(5420),d=n(2426);function i(){const e=(0,s.use)((async()=>(await fetch("/static/md/README.md")).text())());return(0,d.jsx)(c.A,{children:(0,d.jsx)(a.$,{children:e})})}}}]);
-//# sourceMappingURL=853.0cc9ea5a.chunk.js.map

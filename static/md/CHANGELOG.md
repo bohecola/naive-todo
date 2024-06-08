@@ -1,3 +1,13 @@
+## [0.1.11](https://github.com/bohecola/naive-todo/compare/v0.1.10...v0.1.11) (2024-06-08)
+
+
+### Performance Improvements
+
+* use React use API to trigger suspense fallback UI ([0265333](https://github.com/bohecola/naive-todo/commit/0265333d52f97a2307d49a1b5d380ea2e6b84a77))
+* use useSWR to cache fetch ([6206bb7](https://github.com/bohecola/naive-todo/commit/6206bb7dfe0372a3f50706fc0f6ac1ba988048f3))
+
+
+
 ## [0.1.10](https://github.com/bohecola/naive-todo/compare/v0.1.9...v0.1.10) (2024-06-08)
 
 
