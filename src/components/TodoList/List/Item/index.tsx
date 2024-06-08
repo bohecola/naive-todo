@@ -71,7 +71,8 @@ export default function Item(props: Props) {
 			draggable={draggable}
 			className={`
         flex items-center p-3 mb-2 bg-slate-600/75 text-white rounded last:mb-0
-        hover:opacity-80 cursor-grab
+        hover:opacity-80
+        ${!todo.completed ? "cursor-grab" : ""}
         ${draggedItem?.id === todo.id ? "!cursor-grabbing" : ""}
         ${(dragOverItem?.id === todo.id && !todo.completed) ? "!bg-black/25" : ""}`
 			}

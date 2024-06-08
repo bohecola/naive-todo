@@ -73,7 +73,7 @@ export default function Content({ todo }: Props) {
 						/>
 					</Space.Compact>
 				)
-				:	todo.content}
+				:	<span className="cursor-text">{todo.content}</span>}
 		</div>
 	);
 }
