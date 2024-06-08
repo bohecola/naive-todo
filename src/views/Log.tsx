@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { use } from "react";
 import ReactMarkdown from "react-markdown";
 import BaseContainer from "@/components/common/Container";
 
 export default function About() {
-	const [content, setContent] = useState<string>("");
+	const fetchData = async () => {
+		const response = await fetch("/static/md/CHANGELOG.md");
+		return response.text();
+	};
 
-	useEffect(() => {
-		fetch("/static/md/CHANGELOG.md")
-			.then((res) => res.text())
-			.then((text) => setContent(text));
-	}, []);
+	const data = use(fetchData());
 
 	return (
 		<BaseContainer>
-			<ReactMarkdown>{content}</ReactMarkdown>
+			<ReactMarkdown>{data}</ReactMarkdown>
 		</BaseContainer>
 	);
 }
