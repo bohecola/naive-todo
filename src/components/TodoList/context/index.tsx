@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, Dispatch, ReactNode } from "react";
+import { createContext, useContext, useReducer, Dispatch, PropsWithChildren } from "react";
 import { State, Action, reducer, initialState } from "./reducer";
 
 // TodoList 上下文
@@ -6,7 +6,7 @@ const TodoListContext = createContext<State>(null!);
 const TodoListDispatchContext = createContext<Dispatch<Action>>(null!);
 
 // TodoList 上下文提供器
-export default function TodoListContextProvider({ children }: { children: ReactNode }) {
+export default function TodoListContextProvider({ children }: PropsWithChildren) {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
