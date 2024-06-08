@@ -1,20 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { use } from "react";
+import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import BaseContainer from "@/components/common/Container";
 
 export default function About() {
-	const fetchData = async () => {
-		const response = await fetch("/static/md/README.md");
+	const fetcher = async (url: string) => {
+		const response = await fetch(url);
 		return response.text();
 	};
 
-	const data = use(fetchData());
+	const { data, error, isLoading } = useSWR("/static/md/README.md", fetcher);
 
 	return (
 		<BaseContainer>
-			<ReactMarkdown>{data}</ReactMarkdown>
+			<ReactMarkdown>{data ?? ""}</ReactMarkdown>
 		</BaseContainer>
 	);
 }
