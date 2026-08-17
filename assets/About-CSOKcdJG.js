@@ -1,0 +1,1 @@
+import{i as e,n as t,r as n,s as r,t as i}from"./index-CbkG4Xq1.js";import{n as a,t as o}from"./lib-ZSACMF5B.js";var s=n(),c=r(e());function l(){let{data:e}=a(`/static/md/README.md`,async e=>(await fetch(e)).text(),{suspense:!0});return(0,s.jsx)(c.Suspense,{fallback:(0,s.jsx)(i,{}),children:(0,s.jsx)(t,{children:(0,s.jsx)(o,{children:e})})})}export{l as default};
