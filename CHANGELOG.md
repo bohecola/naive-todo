@@ -1,3 +1,22 @@
+## [0.1.13](https://github.com/bohecola/naive-todo/compare/v0.1.12...v0.1.13) (2026-08-17)
+
+
+### Features
+
+* auto-import components and hooks ([7e85729](https://github.com/bohecola/naive-todo/commit/7e857297896be36080d3a96a6af5eb78f2590194))
+
+
+### Continuous Integration
+
+* update deploy workflow for Vite ([874ea05](https://github.com/bohecola/naive-todo/commit/874ea0544b514ab39886be3ef694fba5bda00cd6))
+
+
+### Build System
+
+* migrate from CRA to Vite ([6dbce7d](https://github.com/bohecola/naive-todo/commit/6dbce7d08d6bff623d9a3bc2363d2793f83fe5a6))
+
+
+
 ## [0.1.12](https://github.com/bohecola/naive-todo/compare/v0.1.11...v0.1.12) (2026-08-17)
 
 
