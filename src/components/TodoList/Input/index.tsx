@@ -1,6 +1,4 @@
-import { KeyboardEvent, useState } from "react";
-import { Input, Select } from "antd";
-import { SendOutlined } from "@ant-design/icons";
+import type { KeyboardEvent } from "react";
 import { nanoid } from "nanoid";
 import { Todo } from "@/types";
 import { options } from "@/data";

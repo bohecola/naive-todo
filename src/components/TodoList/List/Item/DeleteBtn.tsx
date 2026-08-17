@@ -1,5 +1,3 @@
-import { Button } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
 import { useTodoListDispatch } from "../../context";
 import { ActionType } from "../../context/reducer";
 import { Todo } from "@/types";

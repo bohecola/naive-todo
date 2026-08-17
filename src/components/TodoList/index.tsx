@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import List from "./List";
 import TodoInput from "./Input";
 import { useTodoList } from "./context";

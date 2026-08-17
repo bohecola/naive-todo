@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import AutoImport from "unplugin-auto-import/vite";
 import { copyFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -34,19 +35,59 @@ function rootMdFilesPlugin(): Plugin {
 					copyFileSync(src, resolve(outDir, file));
 				}
 			}
-		},
+		}
 	};
 }
 
 export default defineConfig({
-	plugins: [react(), rootMdFilesPlugin()],
+	plugins: [
+		react(),
+		AutoImport({
+			imports: [
+				"react",
+				{
+					react: ["createContext", "lazy", "Suspense", "StrictMode"],
+					"react-router-dom": [
+						"HashRouter",
+						"Navigate",
+						"useRoutes",
+						"useLocation",
+						"useNavigate"
+					],
+					antd: [
+						"ConfigProvider",
+						"theme",
+						"Tag",
+						"Checkbox",
+						"Button",
+						"Skeleton",
+						"Input",
+						"Select",
+						"Space"
+					],
+					"@ant-design/icons": [
+						"GithubOutlined",
+						"DeleteOutlined",
+						"InboxOutlined",
+						"SendOutlined"
+					]
+				}
+			],
+			dts: "src/auto-imports.d.ts",
+			eslintrc: {
+				enabled: true,
+				filepath: "./.eslintrc-auto-import.json"
+			}
+		}),
+		rootMdFilesPlugin()
+	],
 	resolve: {
 		alias: {
-			"@": resolve(process.cwd(), "src"),
-		},
+			"@": resolve(process.cwd(), "src")
+		}
 	},
 	test: {
 		environment: "jsdom",
-		setupFiles: "./src/setupTests.ts",
-	},
+		setupFiles: "./src/setupTests.ts"
+	}
 });

@@ -1,6 +1,4 @@
 import { IconNavItem, NavItem, TextNavItem } from "@/types";
-import { useLocation, useNavigate } from "react-router-dom";
-import { GithubOutlined } from "@ant-design/icons";
 
 export default function Item(props: NavItem) {
 	// 图标

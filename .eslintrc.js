@@ -8,7 +8,8 @@ module.exports = {
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
-		"@bohecola"
+		"@bohecola",
+		"./.eslintrc-auto-import.json"
 	],
 	overrides: [
 	],
@@ -28,6 +29,7 @@ module.exports = {
 	rules: {
 		"no-unused-vars": "off",
 		"react/react-in-jsx-scope": "off",
+		"react/jsx-no-undef": "off",
 		"@typescript-eslint/no-var-requires": "off",
 		"@typescript-eslint/no-non-null-assertion": "off",
 		"@typescript-eslint/no-explicit-any": "off",

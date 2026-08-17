@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
 import BaseContainer from "@/components/common/Container";

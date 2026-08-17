@@ -1,6 +1,5 @@
-import { Checkbox } from "antd";
-import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { Todo } from "@/types";
+import type { CheckboxChangeEvent } from "antd/es/checkbox";
 import { ActionType } from "../../context/reducer";
 import { useTodoListDispatch } from "../../context";
 
