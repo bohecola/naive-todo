@@ -1,1 +1,0 @@
-import{a as e,c as t,i as n,n as r,t as i}from"./index-Bn2fB-wT.js";import{n as a,t as o}from"./react-markdown-DxiO_8nu.js";var s=n(),c=t(e());function l(){let{data:e}=a(`/static/md/README.md`,async e=>(await fetch(e)).text(),{suspense:!0});return(0,s.jsx)(c.Suspense,{fallback:(0,s.jsx)(i,{}),children:(0,s.jsx)(r,{children:(0,s.jsx)(o,{children:e})})})}export{l as default};

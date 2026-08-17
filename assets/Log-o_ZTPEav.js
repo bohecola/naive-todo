@@ -1,0 +1,1 @@
+import{i as e,n as t,r as n,s as r,t as i}from"./index-DcMkNEov.js";import{n as a,t as o}from"./lib-zAWvMW9T.js";var s=n(),c=r(e());function l(){let{data:e}=a(`/static/md/CHANGELOG.md`,async e=>(await fetch(e)).text(),{suspense:!0});return(0,s.jsx)(c.Suspense,{fallback:(0,s.jsx)(i,{}),children:(0,s.jsx)(t,{children:(0,s.jsx)(o,{children:e})})})}export{l as default};
