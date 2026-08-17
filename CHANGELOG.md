@@ -1,3 +1,12 @@
+## [0.1.14](https://github.com/bohecola/naive-todo/compare/v0.1.13...v0.1.14) (2026-08-17)
+
+
+### Features
+
+* upgrade to React 19 and react-markdown 10 ([462b6c4](https://github.com/bohecola/naive-todo/commit/462b6c4a3957b5d06bd55afe9b6db0ec15dd3882))
+
+
+
 ## [0.1.13](https://github.com/bohecola/naive-todo/compare/v0.1.12...v0.1.13) (2026-08-17)
 
 
