@@ -10,3 +10,11 @@ export const store = {
 		return todoList ? JSON.parse(todoList) : initialTodoList;
 	}
 };
+
+// 时间戳格式化（YYYY-MM-DD HH:mm）
+export function formatDate(timestamp: string): string {
+	const date = new Date(Number(timestamp));
+	if (isNaN(date.getTime())) return "";
+	const pad = (n: number) => String(n).padStart(2, "0");
+	return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}

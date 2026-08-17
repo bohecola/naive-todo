@@ -1,20 +1,21 @@
 import { Input, Select, Space } from "antd";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useTodoList, useTodoListDispatch } from "../../context";
 import { ActionType } from "../../context/reducer";
 import { options } from "@/data";
+import { formatDate } from "../../utils";
 import { Todo } from "@/types";
 
 type Props = {
-  todo: Todo;
+	todo: Todo;
 }
 
 export default function Content({ todo }: Props) {
 	// 输入框数据
-	const [inputValue, setInputValue] = useState<string>("");
+	const [inputValue, setInputValue] = useState(todo.content);
 
 	// 类型选择数据
-	const [selectedValue, setSelectedValue] = useState<string[]>([]);
+	const [selectedValue, setSelectedValue] = useState<string[]>(todo.type);
 
 	// 活跃状态
 	const { activeId } = useTodoList();
@@ -22,27 +23,34 @@ export default function Content({ todo }: Props) {
 	// 派发器
 	const dispatch = useTodoListDispatch();
 
-	// 挂载
+	// 同步外部类型数据
 	useEffect(() => {
 		setSelectedValue(todo.type);
-	}, []);
+	}, [todo.type]);
+
+	// 进入编辑态时，用最新内容初始化输入框
+	useEffect(() => {
+		if (activeId === todo.id) {
+			setInputValue(todo.content);
+		}
+	}, [activeId, todo.id, todo.content]);
 
 	// 输入监听
-	useEffect(() => {
-		if (inputValue && !todo.completed) {
-			// 未完成时更新
-			dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, content: inputValue } });
-		}
-	}, [inputValue]);
+	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value);
+	};
 
 	// 类型选择
 	const handleSelectChange = (val: string[]) => {
-		dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, type: val } });
 		setSelectedValue(val);
+		dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, type: val } });
 	};
 
-	// 清除活跃状态
+	// 离开编辑态：提交内容并清除活跃状态
 	const clearActive = () => {
+		if (!todo.completed && inputValue !== todo.content) {
+			dispatch({ type: ActionType.UPDATE_TODO, payload: { ...todo, content: inputValue } });
+		}
 		dispatch({ type: ActionType.UPDATE_ACTIVE_ID, payload: "" });
 	};
 
@@ -57,8 +65,8 @@ export default function Content({ todo }: Props) {
 							className="mr-1 w-[300px]"
 							autoFocus={true}
 							maxLength={200}
-							defaultValue={todo.content}
-							onChange={(e) => { setInputValue(e.target.value); }}
+							value={inputValue}
+							onChange={handleInputChange}
 							onPressEnter={clearActive}
 						/>
 						<Select
@@ -73,7 +81,10 @@ export default function Content({ todo }: Props) {
 						/>
 					</Space.Compact>
 				)
-				:	<span className="cursor-text">{todo.content}</span>}
+				:	<span className="cursor-text">
+					{todo.content}
+					<span className="block text-xs text-gray-500 mt-0.5">{formatDate(todo.date)}</span>
+				</span>}
 		</div>
 	);
 }

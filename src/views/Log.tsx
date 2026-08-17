@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import BaseContainer from "@/components/common/Container";
 import Loading from "@/components/common/Loading";
 
-export default function About() {
+export default function Log() {
 	const fetcher = async (url: string) => {
 		const response = await fetch(url);
 		return response.text();
