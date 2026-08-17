@@ -13,7 +13,7 @@ export default function Log() {
 
 	return (
 		<Suspense fallback={<Loading />}>
-			<BaseContainer>
+			<BaseContainer className="max-h-[calc(100vh-120px)] overflow-y-auto">
 				<ReactMarkdown>{data}</ReactMarkdown>
 			</BaseContainer>
 		</Suspense>

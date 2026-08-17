@@ -40,9 +40,9 @@ export default function TodoInput() {
 	}
 
 	return (
-		<div className="flex items-center">
+		<div className="flex items-center gap-3">
 			<Select
-				className="w-[190px] mr-3"
+				className="w-[190px]"
 				mode="multiple"
 				maxTagCount={1}
 				placeholder="任务类型"
