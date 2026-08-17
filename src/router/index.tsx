@@ -1,10 +1,11 @@
 import Home from "@/views/Home";
 import Loading from "@/components/common/Loading";
+import type { ReactElement } from "react";
 
 const About = lazy(() => import("@/views/About"));
 const Log = lazy(() => import("@/views/Log"));
 
-const withLoadingComponent = (comp: JSX.Element) => (
+const withLoadingComponent = (comp: ReactElement) => (
 	<Suspense fallback={<Loading />} >
 		{comp}
 	</Suspense>
