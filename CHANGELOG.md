@@ -1,3 +1,13 @@
+## [0.1.12](https://github.com/bohecola/naive-todo/compare/v0.1.11...v0.1.12) (2026-08-17)
+
+
+### Bug Fixes
+
+* data fetch ([bdc51d4](https://github.com/bohecola/naive-todo/commit/bdc51d493db6f17140a113d40a475f020c048fd3))
+* resolve drag sort and edit clearing bugs, show todo date, cleanup dead code ([942e9ca](https://github.com/bohecola/naive-todo/commit/942e9cadadef8def5da5f8b1b20119b61a8afa0b))
+
+
+
 ## [0.1.11](https://github.com/bohecola/naive-todo/compare/v0.1.10...v0.1.11) (2024-06-08)
 
 
