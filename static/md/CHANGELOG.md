@@ -1,3 +1,7 @@
+## [0.1.13](https://github.com/bohecola/naive-todo/compare/v0.1.12...v0.1.13) (2026-08-17)
+
+
+
 ## [0.1.12](https://github.com/bohecola/naive-todo/compare/v0.1.11...v0.1.12) (2026-08-17)
 
 

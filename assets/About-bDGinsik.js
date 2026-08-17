@@ -1,0 +1,1 @@
+import{a as e,c as t,n,r,t as i}from"./index-Di56IwR7.js";import{n as a,t as o}from"./react-markdown-BcARVlVU.js";var s=t(e()),c=r();function l(){let{data:e}=a(`/static/md/README.md`,async e=>(await fetch(e)).text(),{suspense:!0});return(0,c.jsx)(s.Suspense,{fallback:(0,c.jsx)(i,{}),children:(0,c.jsx)(n,{children:(0,c.jsx)(o,{children:e})})})}export{l as default};
