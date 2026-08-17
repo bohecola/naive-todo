@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import AutoImport from "unplugin-auto-import/vite";
+import tailwindcss from "@tailwindcss/vite";
 import { copyFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
@@ -42,6 +43,7 @@ function rootMdFilesPlugin(): Plugin {
 export default defineConfig({
 	plugins: [
 		react(),
+		tailwindcss(),
 		AutoImport({
 			imports: [
 				"react",
