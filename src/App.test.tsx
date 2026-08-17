@@ -1,9 +1,15 @@
-import React from "react";
+import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
 
-test("renders learn react link", () => {
-	render(<App />);
-	const linkElement = screen.getByText(/learn react/i);
-	expect(linkElement).toBeInTheDocument();
+describe("App", () => {
+	it("renders the NTodo title", () => {
+		render(
+			<HashRouter>
+				<App />
+			</HashRouter>
+		);
+		expect(screen.getByText("NTodo")).toBeInTheDocument();
+	});
 });
