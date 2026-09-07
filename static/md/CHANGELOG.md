@@ -1,3 +1,9 @@
+## [0.1.15](https://github.com/bohecola/naive-todo/compare/v0.1.14...v0.1.15) (2026-09-07)
+
+### Features
+
+* refactor to Todoist-style UI with inbox/today/upcoming views ([5b0ec4e](https://github.com/bohecola/naive-todo/commit/5b0ec4e61a6e157d660c0c7c905e6e09d968cb44))
+
 ## [0.1.14](https://github.com/bohecola/naive-todo/compare/v0.1.13...v0.1.14) (2026-08-17)
 
 
