@@ -1,0 +1,1 @@
+import{n as e,t}from"./index-DGCC0k3d.js";import{n,t as r}from"./lib-Cw-RUOub.js";var i=e(),a=async e=>(await fetch(e)).text();function o(){let{data:e}=n(`/static/md/README.md`,a,{suspense:!0});return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(t,{title:`关于`}),(0,i.jsx)(`article`,{className:`markdown`,children:(0,i.jsx)(r,{children:e})})]})}export{o as default};
