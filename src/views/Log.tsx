@@ -1,21 +1,18 @@
 import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
-import BaseContainer from "@/components/common/Container";
-import Loading from "@/components/common/Loading";
+import PageHeader from "@/components/common/PageHeader";
+
+const fetcher = async (url: string) => (await fetch(url)).text();
 
 export default function Log() {
-	const fetcher = async (url: string) => {
-		const response = await fetch(url);
-		return response.text();
-	};
-
 	const { data } = useSWR("/static/md/CHANGELOG.md", fetcher, { suspense: true });
 
 	return (
-		<Suspense fallback={<Loading />}>
-			<BaseContainer className="max-h-[calc(100vh-120px)] overflow-y-auto">
+		<>
+			<PageHeader title="更新日志" />
+			<article className="markdown">
 				<ReactMarkdown>{data}</ReactMarkdown>
-			</BaseContainer>
-		</Suspense>
+			</article>
+		</>
 	);
 }

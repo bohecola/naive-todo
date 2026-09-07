@@ -1,9 +1,5 @@
-import BaseContainer from "../Container";
+import { Skeleton } from "antd";
 
 export default function Loading() {
-	return (
-		<BaseContainer>
-			<Skeleton active/>
-		</BaseContainer>
-	);
+	return <Skeleton active paragraph={{ rows: 6 }} />;
 }

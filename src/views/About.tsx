@@ -1,21 +1,18 @@
 import useSWR from "swr";
 import ReactMarkdown from "react-markdown";
-import BaseContainer from "@/components/common/Container";
-import Loading from "@/components/common/Loading";
+import PageHeader from "@/components/common/PageHeader";
+
+const fetcher = async (url: string) => (await fetch(url)).text();
 
 export default function About() {
-	const fetcher = async (url: string) => {
-		const response = await fetch(url);
-		return response.text();
-	};
-
 	const { data } = useSWR("/static/md/README.md", fetcher, { suspense: true });
 
 	return (
-		<Suspense fallback={<Loading />}>
-			<BaseContainer>
+		<>
+			<PageHeader title="关于" />
+			<article className="markdown">
 				<ReactMarkdown>{data}</ReactMarkdown>
-			</BaseContainer>
-		</Suspense>
+			</article>
+		</>
 	);
 }

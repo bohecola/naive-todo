@@ -1,10 +1,11 @@
 import Layout from "@/layout";
+import { TodosProvider } from "@/store/todos/context";
 
 function App() {
 	return (
-		<div className="App">
+		<TodosProvider>
 			<Layout />
-		</div>
+		</TodosProvider>
 	);
 }
 

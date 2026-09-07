@@ -3,6 +3,32 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", "Segoe UI", Roboto, sans-serif;
+
+  --color-brand: #dc4c3e;
+  --color-brand-soft: #fdf1ef;
+  --color-ink: #202020;
+  --color-ink-2: #808080;
+  --color-ink-3: #b3b3b3;
+  --color-line: #f0f0f0;
+  --color-canvas: #ffffff;
+  --color-side: #fcfaf8;
+  --color-side-hover: #f3efeb;
+
+  --color-p1: #d1453b;
+  --color-p2: #eb8909;
+  --color-p3: #246fe0;
+  --color-p4: #808080;
+
+  --color-due-overdue: #d1453b;
+  --color-due-today: #058527;
+  --color-due-tomorrow: #ad6200;
+  --color-due-week: #692fc2;
+  --color-due-later: #808080;
+}
+
 @layer base {
   *,
   ::before,
@@ -17,25 +43,474 @@
   ::after {
     --tw-content: "";
   }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    color: var(--color-ink);
+    background: var(--color-canvas);
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-p3);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
-.dot-grid {
-  background: #374151;
-  background-image:
-    linear-gradient(#374151 22px, transparent 0),
-    linear-gradient(90deg, #6b7280 2px, transparent 0);
-  background-size: 24px 24px;
+/* ---------- 侧边栏 ---------- */
+
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--color-brand);
+  color: #fff;
+  font-size: 13px;
 }
+
+.side-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background-color 0.12s ease;
+}
+
+.side-link:hover {
+  background: var(--color-side-hover);
+}
+
+.side-link.is-active {
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.side-icon {
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--color-ink-2);
+}
+
+.side-link.is-active .side-icon {
+  color: var(--color-brand);
+}
+
+.side-add {
+  width: 100%;
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.side-add .side-icon {
+  color: var(--color-brand);
+  font-size: 20px;
+}
+
+.side-kbd {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-ink-3);
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 18px;
+}
+
+.side-count {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-ink-2);
+}
+
+/* 「今天」图标：带红色顶栏的迷你日历，显示当天日期 */
+.cal-icon {
+  width: 18px;
+  height: 18px;
+  margin: 0 1px;
+  border-radius: 4px;
+  border: 1.5px solid var(--color-ink-2);
+  border-top-width: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 11px;
+  align-items: center;
+  color: var(--color-ink-2);
+}
+
+.side-link.is-active .cal-icon {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+/* ---------- 分组标题 ---------- */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.section-count {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-ink-2);
+}
+
+/* ---------- 任务行 ---------- */
+
+.task-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 4px 10px 0;
+  border-bottom: 1px solid var(--color-line);
+  transition: background-color 0.12s ease, opacity 0.15s ease;
+}
+
+.task-row:hover {
+  background: #fafafa;
+}
+
+.task-row[data-dragging="true"] {
+  opacity: 0.4;
+}
+
+.task-row[data-over="true"] {
+  box-shadow: inset 0 2px 0 var(--color-brand);
+}
+
+.drag-handle {
+  position: absolute;
+  left: -26px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-3);
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.task-row:hover .drag-handle {
+  opacity: 1;
+}
+
+.task-row[data-dragging="true"] .drag-handle {
+  cursor: grabbing;
+}
+
+.task-check {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 1.5px solid var(--check);
+  background: var(--check-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--check);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.task-check .anticon {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.task-check:hover .anticon {
+  opacity: 1;
+}
+
+.task-check[data-checked="true"] {
+  background: var(--check);
+  color: #fff;
+}
+
+.task-check[data-checked="true"] .anticon {
+  opacity: 1;
+}
+
+.task-check:active {
+  transform: scale(0.88);
+}
+
+.task-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.task-title {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--color-ink);
+  overflow-wrap: anywhere;
+  transition: color 0.15s ease;
+}
+
+.task-note {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--color-ink-2);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.task-row[data-completed="true"] .task-title {
+  color: var(--color-ink-2);
+  text-decoration: line-through;
+}
+
+.task-actions {
+  display: flex;
+  gap: 2px;
+  margin-top: -2px;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.task-row:hover .task-actions,
+.task-row:focus-within .task-actions {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .task-actions,
+  .drag-handle {
+    opacity: 1;
+  }
+}
+
+.due-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  line-height: 1;
+  color: var(--color-due-later);
+}
+
+.due-chip[data-tone="overdue"] { color: var(--color-due-overdue); }
+.due-chip[data-tone="today"] { color: var(--color-due-today); }
+.due-chip[data-tone="tomorrow"] { color: var(--color-due-tomorrow); }
+.due-chip[data-tone="week"] { color: var(--color-due-week); }
+
+/* ---------- 添加任务 ---------- */
+
+.add-task {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--color-ink-2);
+  border-radius: 6px;
+  transition: color 0.12s ease;
+}
+
+.add-task-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: var(--color-brand);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.add-task:hover {
+  color: var(--color-brand);
+}
+
+.add-task:hover .add-task-icon {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+/* ---------- 编辑卡片 ---------- */
+
+.task-editor {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: var(--color-canvas);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.task-editor .editor-title {
+  padding: 10px 12px 2px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.task-editor .editor-note {
+  padding: 2px 12px 8px;
+  font-size: 13px;
+  resize: none;
+}
+
+.task-editor .editor-title::placeholder,
+.task-editor .editor-note::placeholder {
+  color: var(--color-ink-3);
+  font-weight: 400;
+}
+
+.editor-chip {
+  color: var(--color-ink-2);
+  border-color: var(--color-line);
+}
+
+.editor-chip.ant-picker {
+  width: auto;
+  min-width: 84px;
+}
+
+.quick-add-modal .ant-modal-content {
+  padding: 0;
+}
+
+.undo-btn {
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+/* ---------- 已完成 ---------- */
+
+.completed-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.completed-arrow {
+  font-size: 10px;
+  color: var(--color-ink-2);
+  transform: rotate(-90deg);
+  transition: transform 0.15s ease;
+}
+
+.completed-arrow[data-open="true"] {
+  transform: rotate(0deg);
+}
+
+/* ---------- 空状态 ---------- */
+
+.empty-state {
+  padding: 40px 0 28px;
+  text-align: center;
+}
+
+.empty-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: var(--color-brand-soft);
+  color: var(--color-brand);
+  font-size: 24px;
+}
+
+/* ---------- Markdown 页面 ---------- */
+
+.markdown {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.markdown h1 { font-size: 22px; margin: 1.6em 0 0.6em; }
+.markdown h2 { font-size: 18px; margin: 1.6em 0 0.5em; padding-bottom: 0.3em; border-bottom: 1px solid var(--color-line); }
+.markdown h3 { font-size: 15.5px; margin: 1.3em 0 0.4em; }
+.markdown h1:first-child { margin-top: 0; }
+.markdown p, .markdown ul, .markdown ol { margin: 0 0 1em; }
+.markdown ul, .markdown ol { padding-left: 1.4em; }
+.markdown a { color: var(--color-p3); }
+.markdown code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  background: #f5f5f5;
+  font-size: 0.9em;
+}
+.markdown pre {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #f7f7f7;
+  overflow-x: auto;
+}
+.markdown pre code { padding: 0; background: none; }
+.markdown input[type="checkbox"] { margin-right: 6px; }
+
+/* ---------- 滚动条与动效偏好 ---------- */
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgba(144, 147, 153, 0.3);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 *::-webkit-scrollbar-track {
-  background: rgba(144, 147, 153, 0.1);
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

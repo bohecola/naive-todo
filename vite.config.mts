@@ -55,23 +55,6 @@ export default defineConfig({
 						"useRoutes",
 						"useLocation",
 						"useNavigate"
-					],
-					antd: [
-						"ConfigProvider",
-						"theme",
-						"Tag",
-						"Checkbox",
-						"Button",
-						"Skeleton",
-						"Input",
-						"Select",
-						"Space"
-					],
-					"@ant-design/icons": [
-						"GithubOutlined",
-						"DeleteOutlined",
-						"InboxOutlined",
-						"SendOutlined"
 					]
 				}
 			],
