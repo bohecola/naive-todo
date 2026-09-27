@@ -1,22 +1,22 @@
 export interface TextNavItem {
-  type: "text";
-  title: string;
-  path: string;
+	type: 'text'
+	title: string
+	path: string
 }
 
 export interface IconNavItem {
-  type: "icon";
-  icon: string;
-  link: string;
-  isExternalLink: boolean;
+	type: 'icon'
+	icon: string
+	link: string
+	isExternalLink: boolean
 }
 
 export type NavItem = TextNavItem | IconNavItem
 
 export interface Todo {
-  id: string
-  content: string
-  date: string
-  type: string[]
-  completed: boolean
+	id: string
+	content: string
+	date: string
+	type: string[]
+	completed: boolean
 }

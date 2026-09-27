@@ -1,28 +1,28 @@
-import Title from "./Title";
-import Item from "./Item";
-import Empty from "./empty";
-import { Todo } from "@/types";
-import { useTodoList, useTodoListDispatch } from "../context";
-import { ActionType } from "../context/reducer";
+import type { Todo } from '@/types'
+import { useTodoList, useTodoListDispatch } from '../context'
+import { ActionType } from '../context/reducer'
+import Empty from './empty'
+import Item from './Item'
+import Title from './Title'
 
 interface Props {
-  title: string
-	list: Todo[],
-  draggable?: boolean
+	title: string
+	list: Todo[]
+	draggable?: boolean
 }
 
 export default function List(props: Props) {
-	const { title, list, draggable } = props;
+	const { title, list, draggable } = props
 	// 数据
-	const { todoList } = useTodoList();
+	const { todoList } = useTodoList()
 
 	// 派发器
-	const dispatch = useTodoListDispatch();
+	const dispatch = useTodoListDispatch()
 
 	// Drag 元素
-	const [draggedItem, setDraggedItem] = useState<Todo>();
+	const [draggedItem, setDraggedItem] = useState<Todo>()
 	// DragOver 元素
-	const [dragOverItem, setDragOverItem] = useState<Todo>();
+	const [dragOverItem, setDragOverItem] = useState<Todo>()
 
 	// 状态提升
 	const otherProps = {
@@ -31,17 +31,17 @@ export default function List(props: Props) {
 		todoList,
 		// 设置 Dragged 元素
 		updateDraggedItem: (todo: Todo | undefined) => {
-			setDraggedItem(todo);
+			setDraggedItem(todo)
 		},
 		// 更新 DragOver 元素
 		updateDragOverItem: (todo: Todo | undefined) => {
-			setDragOverItem(todo);
+			setDragOverItem(todo)
 		},
 		// 更新列表
 		updateTodoList: (todoList: Todo[]) => {
-			dispatch({ type: ActionType.UPDATE_TODO_LIST, payload: todoList });
-		}
-	};
+			dispatch({ type: ActionType.UPDATE_TODO_LIST, payload: todoList })
+		},
+	}
 
 	return (
 		<div>
@@ -49,19 +49,21 @@ export default function List(props: Props) {
 			{
 				list.length > 0
 					? (
-						<ul
-							className="mb-5 p-0 border-slate-600">
-							{list.map((todo, index) => (
-								<Item
-									draggable={draggable}
-									key={todo.id}
-									todo={todo}
-									{...otherProps}
-								/>
-							))}
-						</ul>)
+							<ul
+								className="mb-5 p-0 border-slate-600"
+							>
+								{list.map(todo => (
+									<Item
+										draggable={draggable}
+										key={todo.id}
+										todo={todo}
+										{...otherProps}
+									/>
+								))}
+							</ul>
+						)
 					: <Empty />
 			}
 		</div>
-	);
+	)
 }

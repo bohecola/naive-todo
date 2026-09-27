@@ -1,27 +1,29 @@
-import type { KeyboardEvent } from "react";
-import { nanoid } from "nanoid";
-import { Todo } from "@/types";
-import { options } from "@/data";
-import { useTodoListDispatch } from "../context";
-import { ActionType } from "../context/reducer";
+import type { KeyboardEvent } from 'react'
+import type { Todo } from '@/types'
+import { nanoid } from 'nanoid'
+import { options } from '@/data'
+import { useTodoListDispatch } from '../context'
+import { ActionType } from '../context/reducer'
 
 export default function TodoInput() {
 	// 数据
-	const [inputValue, setInputValue] = useState<string>("");
-	const [selectedValue, setSelectedValue] = useState<string[]>(["important"]);
+	const [inputValue, setInputValue] = useState<string>('')
+	const [selectedValue, setSelectedValue] = useState<string[]>(['important'])
 
 	// 派发器
-	const dispatch = useTodoListDispatch();
+	const dispatch = useTodoListDispatch()
 
 	// 回车提交
 	function handleKeyUp(event: KeyboardEvent<HTMLInputElement>) {
-		if (event.key !== "Enter") return;
-		submit();
+		if (event.key !== 'Enter')
+			return
+		submit()
 	}
 
 	// 提交
 	function submit() {
-		if (inputValue.trim() === "") return;
+		if (inputValue.trim() === '')
+			return
 
 		// 数据
 		const todo: Todo = {
@@ -29,14 +31,14 @@ export default function TodoInput() {
 			content: inputValue,
 			date: Date.now().toString(),
 			type: selectedValue,
-			completed: false
-		};
+			completed: false,
+		}
 
 		// 添加
-		dispatch({ type: ActionType.ADD_TODO, payload: todo });
+		dispatch({ type: ActionType.ADD_TODO, payload: todo })
 
 		// 清空
-		setInputValue("");
+		setInputValue('')
 	}
 
 	return (
@@ -48,15 +50,15 @@ export default function TodoInput() {
 				placeholder="任务类型"
 				value={selectedValue}
 				options={options}
-				onChange={(val) => { setSelectedValue(val); }}
+				onChange={(val) => { setSelectedValue(val) }}
 			/>
 			<Input
-				addonAfter={<SendOutlined onClick={submit}/>}
+				addonAfter={<SendOutlined onClick={submit} />}
 				maxLength={200}
 				value={inputValue}
 				onKeyUp={handleKeyUp}
-				onChange={(e) => { setInputValue(e.target.value); }}
+				onChange={(e) => { setInputValue(e.target.value) }}
 			/>
 		</div>
-	);
+	)
 }

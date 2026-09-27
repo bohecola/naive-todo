@@ -1,9 +1,9 @@
-import BaseContainer from "../Container";
+import BaseContainer from '../Container'
 
 export default function Loading() {
 	return (
 		<BaseContainer>
-			<Skeleton active/>
+			<Skeleton active />
 		</BaseContainer>
-	);
+	)
 }

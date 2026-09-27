@@ -1,70 +1,32 @@
-import js from "@eslint/js";
-import globals from "globals";
-import react from "eslint-plugin-react";
-import ts from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import jsonc from "eslint-plugin-jsonc";
-import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
-
-const require = createRequire(import.meta.url);
+import { readFileSync } from 'node:fs'
+import antfu from '@antfu/eslint-config'
 
 // unplugin-auto-import 生成的 globals（eslintrc 格式 -> flat config）
 const autoImportGlobals = JSON.parse(
-	readFileSync(new URL("./.eslintrc-auto-import.json", import.meta.url), "utf8")
-).globals;
+	readFileSync(new URL('./.eslintrc-auto-import.json', import.meta.url), 'utf8'),
+).globals
 const autoImportFlatGlobals = Object.fromEntries(
-	Object.entries(autoImportGlobals).map(([key, value]) => [key, value ? "writable" : "readonly"])
-);
+	Object.entries(autoImportGlobals).map(([key, value]) => [key, value ? 'writable' : 'readonly']),
+)
 
-// 复用 @bohecola/eslint-config-basic 的规则与 ignorePatterns
-const bohecolaBasic = require("@bohecola/eslint-config-basic");
-
-export default [
-	{
-		ignores: bohecolaBasic.ignorePatterns
+export default antfu({
+	type: 'app',
+	react: true,
+	// 缩进沿用仓库现有的 tab；引号与分号采用 antfu 默认风格（单引号 / 无分号）
+	stylistic: {
+		indent: 'tab',
 	},
-	js.configs.recommended,
-	{
-		files: ["**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}"],
-		languageOptions: {
-			parser: tsParser,
-			ecmaVersion: "latest",
-			sourceType: "module",
-			globals: {
-				...globals.browser,
-				...globals.node,
-				JSX: "readonly",
-				React: "readonly",
-				...autoImportFlatGlobals
-			}
-		},
-		plugins: {
-			react,
-			"@typescript-eslint": ts
-		},
-		rules: {
-			...react.configs.flat.recommended.rules,
-			...react.configs.flat["jsx-runtime"].rules,
-			...ts.configs.recommended.rules,
-			...bohecolaBasic.rules,
-			"no-unused-vars": "off",
-			"react/react-in-jsx-scope": "off",
-			"react/jsx-no-undef": "off",
-			"@typescript-eslint/no-var-requires": "off",
-			"@typescript-eslint/no-non-null-assertion": "off",
-			"@typescript-eslint/no-explicit-any": "off",
-			"@typescript-eslint/no-unused-vars": "off"
-		},
-		settings: {
-			react: { version: "19.2.8" }
-		}
+}, {
+	files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'],
+	languageOptions: {
+		globals: autoImportFlatGlobals,
 	},
-	{
-		files: ["*.json", "*.json5"],
-		plugins: { jsonc },
-		rules: {
-			...jsonc.configs["flat/recommended-with-jsonc"].rules
-		}
-	}
-];
+}, {
+	rules: {
+		// 项目约定：放宽以下规则
+		'ts/no-non-null-assertion': 'off',
+		'ts/no-explicit-any': 'off',
+		// JSON 文件保持 2 空格缩进惯例，不随代码的 tab 缩进
+		'jsonc/indent': ['error', 2],
+	},
+})

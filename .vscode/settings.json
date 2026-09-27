@@ -25,5 +25,5 @@
   "files.eol": "\n",
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
-  },
+  }
 }

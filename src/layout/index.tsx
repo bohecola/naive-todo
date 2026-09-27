@@ -1,8 +1,8 @@
-import router from "@/router";
-import Header from "./Header/index";
+import router from '@/router'
+import Header from './Header/index'
 
 export default function Layout() {
-	const outlet = useRoutes(router);
+	const outlet = useRoutes(router)
 
 	return (
 		<div>
@@ -11,5 +11,5 @@ export default function Layout() {
 				{outlet}
 			</main>
 		</div>
-	);
+	)
 }

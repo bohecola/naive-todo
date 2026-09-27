@@ -1,23 +1,16 @@
-import List from "./List";
-import TodoInput from "./Input";
-import { useTodoList } from "./context";
-import { Todo } from "@/types";
-import BaseContainer from "../common/Container";
+import BaseContainer from '../common/Container'
+import { useTodoList } from './context'
+import TodoInput from './Input'
+import List from './List'
 
 export default function TodoList() {
-	const { todoList } = useTodoList();
+	const { todoList } = useTodoList()
 
 	// 未完成列表
-	const [unDoneList, setUnDoneList] = useState<Todo[]>([]);
+	const unDoneList = useMemo(() => todoList.filter(item => !item.completed), [todoList])
 
 	// 已完成列表
-	const [doneList, setDoneList] = useState<Todo[]>([]);
-
-	// 更新视图列表
-	useEffect(() => {
-		setUnDoneList(todoList.filter((item) => !item.completed));
-		setDoneList(todoList.filter((item) => item.completed));
-	}, [todoList]);
+	const doneList = useMemo(() => todoList.filter(item => item.completed), [todoList])
 
 	return (
 		<BaseContainer>
@@ -27,11 +20,13 @@ export default function TodoList() {
 				draggable
 			/>
 
-			{doneList.length > 0 && (<List
-				title="已完成"
-				list={doneList}
-			/>)}
+			{doneList.length > 0 && (
+				<List
+					title="已完成"
+					list={doneList}
+				/>
+			)}
 			<TodoInput />
 		</BaseContainer>
-	);
+	)
 }

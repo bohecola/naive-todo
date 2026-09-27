@@ -1,5 +1,5 @@
-import TodoListContextProvider from "@/components/TodoList/context";
-import TodoList from "@/components/TodoList";
+import TodoList from '@/components/TodoList'
+import TodoListContextProvider from '@/components/TodoList/context'
 
 export default function Home() {
 	return (
@@ -8,5 +8,5 @@ export default function Home() {
 				<TodoList />
 			</TodoListContextProvider>
 		</div>
-	);
+	)
 }
